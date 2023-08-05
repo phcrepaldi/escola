@@ -1,21 +1,16 @@
 package com.example.escola.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.ColumnDefault;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.validator.constraints.Length;
 import com.example.escola.enums.Genero;
-import java.util.ArrayList;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @MappedSuperclass
-@Entity
 @Table(name = "pessoa")
 @Comment(value="Tabela de Pessoas")
 public abstract class Pessoa extends BaseEntity{
@@ -32,10 +27,9 @@ public abstract class Pessoa extends BaseEntity{
     private String apelido;
 
     @NotNull(message = "Data de nascimento é obrigatório")
-    @Basic(optional = false)
-    @Min(value = 01/01/2020, message = "Data de nascimento está abaixo do valor minimo")
-    @Max(value = 01/01/1900, message = "Data de nascimento está acima do valor máximo")
+    @Past(message = "A data de nascimento deve estar no passado")
     @Column(name = "datanas")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Formato esperado da data
     private Date datanas;
     @Enumerated(EnumType.STRING)
     @Column(name="genero", nullable = false)
@@ -70,7 +64,8 @@ public abstract class Pessoa extends BaseEntity{
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String apelido, Date dataNascimento, Genero genero, String email, String nif, String telefone, String morada) {
+    public Pessoa(Long id, String nome, String apelido, Date dataNascimento, Genero genero, String email, String nif, String telefone, String morada) {
+        super(id);
         this.nome = nome;
         this.apelido = apelido;
         this.datanas = dataNascimento;
@@ -80,6 +75,7 @@ public abstract class Pessoa extends BaseEntity{
         this.telefone = telefone;
         this.morada = morada;
     }
+
 
     public String getNome() {
         return nome;
@@ -97,12 +93,12 @@ public abstract class Pessoa extends BaseEntity{
         this.apelido = apelido;
     }
 
-    public Date getDataNascimento() {
+    public Date getDatanas() {
         return datanas;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.datanas = dataNascimento;
+    public void setDatanas(Date datanas) {
+        this.datanas = datanas;
     }
 
     public Genero getGenero() {

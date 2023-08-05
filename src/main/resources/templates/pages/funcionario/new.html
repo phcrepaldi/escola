@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir Funcionarios</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <h1>Inserir Funcionários</h1>
+            <table>
+                <form th:action="@{/funcionario/save}" th:object="${funcionario}" method="post">
+                    <!-- nome -->
+                    <tr>
+
+
+                        <div>
+                            <td><label for="nome">Nome</label></td>
+                            <td><input type="text" id="nome" th:field="*{nome}">
+                                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></td>
+                        </div>
+                    </tr>
+                    <!-- apelido -->
+                    <tr>
+
+
+                        <div>
+                            <td><label for="apelido">Apelido</label></td>
+                            <td><input type="text" id="apelido" th:field="*{apelido}">
+                                <span th:if="${#fields.hasErrors('apelido')}" th:errors="*{apelido}"></span></td>
+                        </div>
+                    </tr>
+                    <!-- idade -->
+                    <tr>
+                        <div>
+                            <td><label for="datanas">Data de Nascimento</label>
+                            <td><input type="date" step="1" id="datanas" th:field="*{datanas}"></td>
+                            <span th:if="${#fields.hasErrors('datanas')}" th:errors="*{datanas}"></span></td>
+                        </div>
+                    </tr>
+                    <!-- genero -->
+                    <tr>
+                        <div>
+                            <td><label for="genero">Genero:</label></td>
+                            <td><div th:each="genero:${generos}">
+                                <input name="genero" type="radio" id="genero" th:value="${genero}" th:checked="${genero.ordinal() == 0}">
+                                <label for="genero" th:text="${genero}"></label>
+                            </div></td>
+                        </div>
+                    </tr>
+                    <!-- email -->
+                    <tr>
+
+                        <div>
+                            <td><label for="email">Email</label></td>
+                            <td><input type="text" id="email" th:field="*{email}">
+                                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></td>
+                        </div>
+                    </tr>
+
+                    <!-- nif -->
+                    <tr>
+
+                        <div>
+                            <td><label for="nif">NIF</label></td>
+                            <td><input type="text" id="nif" th:field="*{nif}">
+                                <span th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}"></span></td>
+                        </div>
+                    </tr>
+
+                    <!-- telefone -->
+                    <tr>
+
+                        <div>
+                            <td><label for="telefone">Telefone</label></td>
+                            <td><input type="text" id="telefone" th:field="*{telefone}">
+                                <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span></td>
+                        </div>
+                    </tr>
+
+                    <!-- morada -->
+                    <tr>
+
+                        <div>
+                            <td><label for="morada">Morada</label></td>
+                            <td><input type="text" id="morada" th:field="*{morada}">
+                                <span th:if="${#fields.hasErrors('morada')}" th:errors="*{morada}"></span></td>
+                        </div>
+                    </tr>
+
+                    <!-- salario -->
+                    <tr>
+
+                        <div>
+                            <td><label for="salario">Salário</label></td>
+                            <td><input type="number" id="salario" th:field="*{salario}">
+                                <span th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></span></td>
+                        </div>
+                    </tr>
+
+                    <!-- botao -->
+                    <tr>
+                        <div>
+                            <td><button type="submit">Submeter</button></td>
+                            <!--<td><button type="button" onclick="window.location.href='/autor/list'">Listar</button></td>-->
+                        </div>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
