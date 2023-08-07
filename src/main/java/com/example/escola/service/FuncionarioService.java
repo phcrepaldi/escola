@@ -20,6 +20,8 @@ public class FuncionarioService {
     public Funcionario saveFuncionario(@Valid Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }
-
+    public List<Funcionario> getAllFuncionario(){
+        return funcionarioRepository.findAll();
+    }
 
 }

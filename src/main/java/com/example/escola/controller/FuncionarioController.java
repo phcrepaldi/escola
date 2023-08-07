@@ -29,6 +29,18 @@ public class FuncionarioController {
         this.funcionarioService = funcionarioService;
     }
 
+    @GetMapping("/funcionario/list")
+    public String getAllFuncionario(Model model){
+        List<Funcionario> funcionario = funcionarioService.getAllFuncionario();
+        model.addAttribute("funcionario", funcionario);
+        return "pages/funcionario/list";
+    }
+
+
+
+
+
+
     @GetMapping("/funcionario/new")
     public String addFuncionario(Model model){
         model.addAttribute("funcionario", new Funcionario());
@@ -46,7 +58,6 @@ public class FuncionarioController {
             return null;
         }
     }
-
 
     @PostMapping("/funcionario/save")
     //   public String saveFuncionario(@Valid Funcionario funcionario){
