@@ -24,4 +24,7 @@ public class FuncionarioService {
         return funcionarioRepository.findAll();
     }
 
+    public void deleteFuncionario(Long id){funcionarioRepository.deleteById(id);
+    }
+
 }

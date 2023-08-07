@@ -31,7 +31,7 @@
                         <td class="center" th:text="${func.id}"></td>
                         <td class="center" th:text="${func.nome}"></td>
                         <td class="center" th:text="${func.apelido}"></td>
-                        <td class="center" th:text="${func.datanas}"></td>
+                        <td class="center" th:text="${#dates.format(func.datanas, 'dd-MM-yyyy')}"></td>
                         <td class="center" th:text="${func.genero}"></td>
                         <td class="center" th:text="${func.email}">
                         <td class="center" th:text="${func.nif}"></td>
@@ -42,7 +42,6 @@
                             <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>
                             <a th:href="@{/funcionario/edit/{id}(id=${func.id})}"><button type="button">Editar</button></a>
                             <a th:href="@{/funcionario/delete/{id}(id=${func.id})}"><button type="button">Apagar</button></a>
-
                         </td>
                     </tr>
 

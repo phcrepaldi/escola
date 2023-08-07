@@ -37,7 +37,11 @@ public class FuncionarioController {
     }
 
 
-
+    @GetMapping("/funcionario/delete/{id}")
+    public String deleteFuncionario(@PathVariable("id") Long id){
+        funcionarioService.deleteFuncionario(id);
+        return "redirect:/funcionario/list";
+    }
 
 
 
