@@ -54,4 +54,8 @@ public class FuncionarioService {
     public void deleteFuncionario(Long id){funcionarioRepository.deleteById(id);
     }
 
+    public List<Funcionario> getFuncionarioByNome(String keyword){
+        return funcionarioRepository.findByNomeContainingIgnoreCase(keyword);
+    }
+
 }

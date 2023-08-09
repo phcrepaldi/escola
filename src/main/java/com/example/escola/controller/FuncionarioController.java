@@ -115,7 +115,14 @@ public class FuncionarioController {
 
     }
 
+    @GetMapping("/funcionario/search")
+    public String pesquisaFuncionario(@RequestParam("keyword") String keyword, Model model){
+        List<Funcionario> funcionario= funcionarioService.getFuncionarioByNome(keyword);
+        model.addAttribute("funcionario", funcionario);
+        model.addAttribute("keyword", keyword);
 
+        return "pages/funcionario/list";
+    }
 
 
 

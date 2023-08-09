@@ -9,7 +9,14 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <h1>Lista de Funcionarios</h1>
+            <h1>Lista de Funcionários</h1>
+            <form th:action="@{/funcionario/search}" method="get">
+                <label>Pesquise por Funcionários:</label>
+                <input type="text" name="keyword">
+                <button type="submit">Pesquisar</button>
+                <br>
+                <br>
+            </form>
             <div th:if="${!funcionario.isEmpty()}">
                 <table>
                     <thead>
