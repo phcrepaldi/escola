@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inserir Funcionarios</title>
+    <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <h1>Inserir Funcionários</h1>
+            <h1>Atualizar Autores</h1>
             <table>
-                <form th:action="@{/funcionario/save}" th:object="${funcionario}" method="post">
+                <div th:if="${sucesso}">
+                    <span th:text="${sucesso}"></span>
+                </div>
+                <form th:action="@{/funcionario/{id}/edit(id=${funcionario.id})}" th:object="${funcionario}" method="post">
+                    <input th:field="*{id}" type="hidden">
                     <!-- nome -->
                     <tr>
-
-
                         <div>
                             <td><label for="nome">Nome</label></td>
                             <td><input type="text" id="nome" th:field="*{nome}">
@@ -24,8 +26,6 @@
                     </tr>
                     <!-- apelido -->
                     <tr>
-
-
                         <div>
                             <td><label for="apelido">Apelido</label></td>
                             <td><input type="text" id="apelido" th:field="*{apelido}">
@@ -45,7 +45,7 @@
                         <div>
                             <td><label for="genero">Genero:</label></td>
                             <td><div th:each="genero:${generos}">
-                                <input name="genero" type="radio" id="genero" th:value="${genero}" th:checked="${genero.ordinal() == 0}">
+                                <input name="genero" type="radio" id="genero" th:value="${genero}" th:checked="${funcionario.genero == genero}">
                                 <label for="genero" th:text="${genero}"></label>
                             </div></td>
                         </div>
@@ -109,6 +109,7 @@
                     </tr>
                 </form>
             </table>
+
         </div>
     </div>
 </div>

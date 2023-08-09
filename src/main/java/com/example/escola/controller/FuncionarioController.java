@@ -81,4 +81,43 @@ public class FuncionarioController {
         return "redirect:/funcionario/new";
     }
 
+
+
+
+    @GetMapping("/funcionario/edit/{id}")
+    public String editFuncionario(@PathVariable("id") Long id, Model model){
+        Optional<Funcionario> funcionario = funcionarioService.getFuncionarioById(id);
+        if (funcionario.isPresent()){
+            model.addAttribute("funcionario", funcionario.get());
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/edit";
+        }
+        return "redirect:/funcionario/list";
+    }
+    @PostMapping("/funcionario/{id}/edit")
+    public String updateFuncionario(@PathVariable("id") Long id, @Valid @ModelAttribute("funcionario") Funcionario funcionario,
+                              BindingResult result, Model model){
+        if (result.hasErrors()){
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/edit";
+        }
+
+        Funcionario updatedFuncionario = funcionarioService.updateFuncionario(id,funcionario);
+
+        if (updatedFuncionario == null){
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/edit";
+        }else{
+            model.addAttribute("generos", Genero.values());
+            model.addAttribute("sucesso", "Funcionario atualizado com sucesso!");
+            return "pages/funcionario/edit";   //return "redirect:/funcionario/list";
+        }
+
+    }
+
+
+
+
+
+
 }
