@@ -10,6 +10,14 @@
     <div class="principal">
         <div class="interna">
             <h1>Listar Professores</h1>
+
+            <form th:action="@{/professores/search}" method="get">
+                <lable>Pesquise por Professor:</lable>
+                <input type="text" name="keyword" th:value="${keyword}">
+                <br>
+                <br>
+                <button type="submit">Pesquisar</button>
+            </form>
             <div th:if="${!professores.isEmpty()}">
             <table>
                 <thead>

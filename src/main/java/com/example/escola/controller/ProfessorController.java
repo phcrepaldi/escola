@@ -121,7 +121,7 @@ public class ProfessorController {
     @GetMapping("professores/search")
     public String pesquisaProfessores(@RequestParam("keyword") String keyword, Model model){
 
-        List<Professor> professores = professorService.getProfessoresByTitle(keyword);
+        List<Professor> professores = professorService.getProfessoresByNome(keyword);
         model.addAttribute("professores", professores);
         model.addAttribute("keyword", keyword);
 

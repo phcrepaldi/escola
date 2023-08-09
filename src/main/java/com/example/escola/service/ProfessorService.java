@@ -51,7 +51,7 @@ public class ProfessorService {
         return null;
     }
 
-    public List<Professor> getProfessoresByTitle(String keyword){
+    public List<Professor> getProfessoresByNome(String keyword){
         return professorRepository.findByNomeContainingIgnoreCase(keyword);
     }
 
