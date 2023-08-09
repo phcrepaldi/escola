@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Professor</title>
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+  <div class="principal">
+    <div class="interna">
+      <h1>Dados do Professor(a)</h1>
+      <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Data de Nascimento</th>
+            <th>Género</th>
+            <th>Email</th>
+            <th>NIF</th>
+            <th>Telefone</th>
+            <th>Morada</th>
+            <th>Salário</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td th:text="${professor.id}"></td>
+            <td th:text="${professor.nome}"></td>
+            <td th:text="${professor.apelido}"></td>
+            <td th:text="${professor.datanas}"></td>
+            <td th:text="${professor.genero}"></td>
+            <td th:text="${professor.email}"></td>
+            <td th:text="${professor.nif}"></td>
+            <td th:text="${professor.telefone}"></td>
+            <td th:text="${professor.morada}"></td>
+            <td th:text="${professor.salario}"></td>
+          </tr>
+          <tr>
+            <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.escola.controller;
 
+import com.example.escola.enums.Genero;
 import com.example.escola.model.Professor;
 import com.example.escola.service.ProfessorService;
 import jakarta.validation.Valid;
@@ -22,6 +23,11 @@ public class ProfessorController {
     public ProfessorController(ProfessorService professorService){
         this.professorService=professorService;
         //this.disciplinaService=disciplinaService;
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "pages/index";
     }
 
     @GetMapping("/professores/list")
@@ -49,14 +55,18 @@ public class ProfessorController {
     @GetMapping("professores/new")
     public String addProfessor(Model model){
         model.addAttribute("professor", new Professor());
+        model.addAttribute("generos", Genero.values());
         //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
 
         return "pages/professores/new";
+
     }
 
     @PostMapping("/professores/save")
-    public String saveProfessor(@Valid @ModelAttribute("professor") Professor professor, BindingResult result, Model model){
+    public String saveProfessor(@Valid @ModelAttribute("professor") Professor professor,
+                                BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("generos", Genero.values());
             //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/new";
         }
@@ -77,8 +87,9 @@ public class ProfessorController {
     public String showEditForm(@PathVariable("id") Long id, Model model){
         Optional <Professor> optionalProfessor = professorService.getProfessorById(id);
         if(optionalProfessor.isPresent()){
-
+            Professor professor = optionalProfessor.get();
             model.addAttribute("professor", optionalProfessor.get());
+            model.addAttribute("generos", Genero.values());
             //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
 
             return "pages/professores/edit";
@@ -87,9 +98,11 @@ public class ProfessorController {
     }
 
     @PostMapping("professores/edit/{id}")
-    public String updateProfessor(@PathVariable("id") Long id, @Valid @ModelAttribute("professor") Professor professor,
+    public String updateProfessor(@PathVariable("id") Long id, @Valid @ModelAttribute("professor")
+                                Professor professor,
                                BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("generos", Genero.values());
             //model.addAttribute("disciolinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/edit";
         }
@@ -97,6 +110,7 @@ public class ProfessorController {
 
         if(updateProfessor!=null){
             //model.addAttribute("disciplina",disciplinaService.getAllDiscipinas());
+            model.addAttribute("sexos", Genero.values());
             model.addAttribute("sucesso", "Modelo atualizado com sucesso");
             return "pages/professores/edit";
         }
