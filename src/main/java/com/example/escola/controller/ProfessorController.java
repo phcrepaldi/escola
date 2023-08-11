@@ -2,6 +2,7 @@ package com.example.escola.controller;
 
 import com.example.escola.enums.Genero;
 import com.example.escola.model.Professor;
+import com.example.escola.service.DisciplinaService;
 import com.example.escola.service.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class ProfessorController {
 
     private final ProfessorService professorService;
 
-    //private final DisciplinaService disciplinaService;
+    private final DisciplinaService disciplinaService;
     @Autowired
     public ProfessorController(ProfessorService professorService){
         this.professorService=professorService;
-        //this.disciplinaService=disciplinaService;
+        this.disciplinaService=disciplinaService;
     }
 
     @GetMapping("/")
@@ -34,7 +35,7 @@ public class ProfessorController {
     public String getAllProfessores(Model model){
         List<Professor> professores=professorService.getallProfessores();
         model.addAttribute("professores", professores);
-        //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+        model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
 
         return "pages/professores/list";
     }

@@ -22,13 +22,13 @@ public class Professor extends Pessoa{
     @Column(name = "salario")
     private Double salario;
 
-    /*@ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="professores_disciplinas",
             joinColumns = @JoinColumn(name="professor_id"),
             inverseJoinColumns = @JoinColumn(name="disciplina_id")
     )
-    private List<Disciplina> disciplinas=new ArrayList<>();*/
+    private List<Disciplina> disciplinas=new ArrayList<>();
 
     public Professor() {}
 
@@ -40,6 +40,10 @@ public class Professor extends Pessoa{
     public Double getSalario() {return salario;}
 
     public void setSalario(Double salario) {this.salario = salario;}
+
+    public List<Disciplina> getDisciplinas() {return disciplinas;}
+
+    public void setDisciplinas(List<Disciplina> disciplinas){this.disciplinas=disciplinas;}
 }
 
 
