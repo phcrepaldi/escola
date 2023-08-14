@@ -1,9 +1,15 @@
 package com.example.escola.service;
 
+import com.example.escola.model.Funcao;
 import com.example.escola.repository.FuncionarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.escola.repository.FuncaoRepository;
+import com.example.escola.model.Funcao;
+import com.example.escola.repository.FuncionarioRepository;
+import com.example.escola.model.Funcionario;
+import com.example.escola.model.Funcao;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +22,9 @@ public class FuncionarioService {
     public FuncionarioService(FuncionarioRepository funcionarioRepository) {
         this.funcionarioRepository = funcionarioRepository;
     }
+
+    @Autowired
+    private FuncaoRepository funcaoRepository;
 
     public Funcionario updateFuncionario(Long id, Funcionario funcionario){
         Optional<Funcionario> funcionarioOptional = getFuncionarioById(id);
@@ -31,6 +40,7 @@ public class FuncionarioService {
             _funcionario.setTelefone(funcionario.getTelefone());
             _funcionario.setMorada(funcionario.getMorada());
             _funcionario.setSalario(funcionario.getSalario());
+            _funcionario.setFuncao(funcionario.getFuncao());
 
             return funcionarioRepository.save(_funcionario);
         }
@@ -41,6 +51,8 @@ public class FuncionarioService {
     public Funcionario saveFuncionario(@Valid Funcionario funcionario){
         return funcionarioRepository.save(funcionario);
     }
+
+
     public List<Funcionario> getAllFuncionario(){
         return funcionarioRepository.findAll();
     }

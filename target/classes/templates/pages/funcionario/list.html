@@ -31,6 +31,7 @@
                         <th>Telefone</th>
                         <th>Morada</th>
                         <th>Salário</th>
+                        <th>Função</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,6 +46,9 @@
                         <td class="center" th:text="${func.telefone}"></td>
                         <td class="center" th:text="${func.morada}"></td>
                         <td class="center" th:text="${func.salario}"></td>
+                        <td class="center">
+                            <span th:each="funcao : ${func.funcao}" th:text="${func.funcao.funcaonome}"></span>
+                        </td>
                         <td>
 <!--                            <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>-->
                             <a th:href="@{/funcionario/edit/{id}(id=${func.id})}"><button type="button">Editar</button></a>

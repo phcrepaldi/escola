@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Função</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="center" th:text="${funcao.id}"></td>
+                    <td class="center" th:text="${funcao.funcaonome}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div>
+                <button type="button" onclick="window.location.href='/funcao/list'">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

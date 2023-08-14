@@ -100,6 +100,21 @@
                         </div>
                     </tr>
 
+                    <!-- funcao -->
+                    <tr>
+                        <div>
+                            <td><label for="funcaonome">Função</label></td>
+                            <td>
+                                <select id="funcaonome" th:field="*{funcao.funcaonome}">
+                                    <option th:each="f : ${funcoes}" th:value="${f}" th:text="${f.funcaonome}"></option>
+                                </select>
+
+                                <span th:if="${#fields.hasErrors('funcao.funcaonome')}" th:errors="*{funcao.funcaonome}"></span>
+                            </td>
+                        </div>
+                    </tr>
+
+
                     <!-- botao -->
                     <tr>
                         <div>

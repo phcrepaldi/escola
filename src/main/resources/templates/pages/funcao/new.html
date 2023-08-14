@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <h1>Inserir Funções</h1>
+            <table>
+                <form th:action="@{/funcao/save}" th:object="${funcao}" method="post">
+                    <!-- nome -->
+                    <tr>
+                        <div>
+                            <td><label for="funcaonome">Função</label></td>
+                            <td><input type="text" id="funcaonome" th:field="*{funcaonome}">
+                                <span th:if="${#fields.hasErrors('funcaonome')}" th:errors="*{funcaonome}"></span></td>
+                        </div>
+                    </tr>
+
+
+                    <!-- botao -->
+                    <tr>
+                        <div>
+                            <td>
+                                <button type="submit">Submeter</button>
+                            </td>
+                            <td>
+                                <button type="button" onclick="window.location.href='/funcao/list'">Listar</button>
+                            </td>
+                        </div>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

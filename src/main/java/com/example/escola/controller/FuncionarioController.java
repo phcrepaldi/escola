@@ -1,7 +1,9 @@
 package com.example.escola.controller;
 
 import com.example.escola.enums.Genero;
+import com.example.escola.model.Funcao;
 import com.example.escola.model.Funcionario;
+import com.example.escola.service.FuncaoService;
 import com.example.escola.service.FuncionarioService;
 import com.example.escola.enums.Genero;
 import com.example.escola.service.FuncionarioService;
@@ -24,15 +26,18 @@ public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
 
+    private FuncaoService funcaoService;
+
     @Autowired
-    public FuncionarioController(FuncionarioService funcionarioService) {
+    public FuncionarioController(FuncionarioService funcionarioService,  FuncaoService funcaoService) {
         this.funcionarioService = funcionarioService;
+        this.funcaoService = funcaoService;
     }
 
     @GetMapping("/funcionario/list")
     public String getAllFuncionario(Model model){
-        List<Funcionario> funcionario = funcionarioService.getAllFuncionario();
-        model.addAttribute("funcionario", funcionario);
+        List<Funcionario> funcionarios = funcionarioService.getAllFuncionario();
+        model.addAttribute("funcionario", funcionarios);
         return "pages/funcionario/list";
     }
 
@@ -49,6 +54,10 @@ public class FuncionarioController {
     public String addFuncionario(Model model){
         model.addAttribute("funcionario", new Funcionario());
         model.addAttribute("generos", Genero.values());
+//        List<Funcao> funcoes = funcaoService.getAllFuncao();
+//        System.out.println("Number of funcoes retrieved: " + funcoes.size()); // Add this line
+//        model.addAttribute("funcoes", funcoes);
+        model.addAttribute("funcoes", funcaoService.getAllFuncao());
         return "pages/funcionario/new";
     }
 
@@ -71,16 +80,28 @@ public class FuncionarioController {
                             @RequestParam("datanas") String datanasString){
         if (funcionarioResult.hasErrors()){
             model.addAttribute("generos", Genero.values());
-            //model.addAttribute("detalhes", new FuncionarioDetalhes());
+            model.addAttribute("funcoes", funcaoService.getAllFuncao());
             return "pages/funcionario/new";
         }
+
+        if (funcionario.getFuncao().getFuncaonome() == null || funcionario.getFuncao().getFuncaonome().isEmpty()) {
+            funcionarioResult.rejectValue("funcao.funcaonome", "field.required", "A função é obrigatória.");
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/new";
+        }
+
+
         Date dataNascimento = stringToDate(datanasString);
         funcionario.setDatanas(dataNascimento);
+
+        Funcao funcao = funcionario.getFuncao();
+        Funcao savedFuncao = funcaoService.saveFuncao(funcao);
+
+        funcionario.setFuncao(savedFuncao);
 
         Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
         return "redirect:/funcionario/new";
     }
-
 
 
 
