@@ -105,7 +105,7 @@
                         <div>
                             <td><label for="funcaonome">Função</label></td>
                             <td>
-                                <select id="funcaonome" th:field="*{funcao}">
+                                <select id="funcaonome" th:field="*{funcao.id}">
                                     <option th:each="f : ${funcoes}" th:value="${f.id}" th:text="${f.funcaonome}"></option>
                                 </select>
 

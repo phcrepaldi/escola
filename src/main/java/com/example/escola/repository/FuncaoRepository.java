@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface FuncaoRepository extends JpaRepository<Funcao, Long> {
     List<Funcao> findByFuncionarios(Funcionario funcionario);
+    Funcao findByFuncaonome(String funcaonome);
+
 
 }
 

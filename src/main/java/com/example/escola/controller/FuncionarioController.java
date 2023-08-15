@@ -101,17 +101,33 @@ public class FuncionarioController {
             return "pages/funcionario/new";
         }
 
+        Long funcaoId = funcionario.getFuncao().getId();
+        if (funcaoId == null) {
+            funcionarioResult.rejectValue("funcao.id", "field.required", "A função é obrigatória.");
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/new";
+        }
 
         Date dataNascimento = stringToDate(datanasString);
         funcionario.setDatanas(dataNascimento);
 
-        Funcao funcao = funcionario.getFuncao();
-        Funcao savedFuncao = funcaoService.saveFuncao(funcao);
 
-        funcionario.setFuncao(savedFuncao);
+        Funcao funcao = funcaoRepository.findById(funcaoId).orElse(null);
+        if (funcao != null) {
+            funcionario.setFuncao(funcao);
+            Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
+        }
 
-        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
 
+//        Funcao funcao = funcionario.getFuncao();
+//        Funcao savedFuncao = funcaoService.saveFuncao(funcao);
+//
+//        funcionario.setFuncao(savedFuncao);
+
+//        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
+//        funcionario.setFuncao(savedFuncao);
+
+//        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
 
         return "redirect:/funcionario/new";
     }
@@ -125,6 +141,8 @@ public class FuncionarioController {
             model.addAttribute("funcionario", funcionario.get());
             model.addAttribute("generos", Genero.values());
             model.addAttribute("funcoes", funcaoService.getAllFuncao());
+
+
             return "pages/funcionario/edit";
         }
         return "redirect:/funcionario/list";
@@ -134,6 +152,8 @@ public class FuncionarioController {
                               BindingResult result, Model model){
         if (result.hasErrors()){
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("funcoes", funcaoService.getAllFuncao());
+
             return "pages/funcionario/edit";
         }
 
