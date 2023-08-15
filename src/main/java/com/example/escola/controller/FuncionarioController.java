@@ -124,6 +124,7 @@ public class FuncionarioController {
         if (funcionario.isPresent()){
             model.addAttribute("funcionario", funcionario.get());
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("funcoes", funcaoService.getAllFuncao());
             return "pages/funcionario/edit";
         }
         return "redirect:/funcionario/list";
@@ -143,6 +144,7 @@ public class FuncionarioController {
             return "pages/funcionario/edit";
         }else{
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("funcoes", funcaoService.getAllFuncao());
             model.addAttribute("sucesso", "Funcionario atualizado com sucesso!");
             return "pages/funcionario/edit";   //return "redirect:/funcionario/list";
         }
