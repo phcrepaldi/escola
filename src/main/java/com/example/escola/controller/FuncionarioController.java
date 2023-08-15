@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import com.example.escola.repository.FuncionarioRepository;
+import com.example.escola.repository.FuncaoRepository;
+
 
 @Controller
 public class FuncionarioController {
@@ -27,6 +30,14 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     private FuncaoService funcaoService;
+
+
+    @Autowired
+    private FuncionarioRepository funcionarioRepository; // Declare FuncionarioRepository
+
+    @Autowired
+    private FuncaoRepository funcaoRepository; // Declare FuncaoRepository
+
 
     @Autowired
     public FuncionarioController(FuncionarioService funcionarioService,  FuncaoService funcaoService) {
@@ -100,6 +111,8 @@ public class FuncionarioController {
         funcionario.setFuncao(savedFuncao);
 
         Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
+
+
         return "redirect:/funcionario/new";
     }
 

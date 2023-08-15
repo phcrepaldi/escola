@@ -23,6 +23,11 @@ public class Funcao extends BaseEntity{
 
     public Funcao() {}
 
+    @Override
+    public String toString() {
+        return funcaonome; // Return the meaningful property for display
+    }
+
     public String getFuncaonome() {
         return funcaonome;
     }

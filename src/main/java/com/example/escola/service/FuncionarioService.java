@@ -18,6 +18,8 @@ import com.example.escola.model.Funcionario;
 @Service
 public class FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
+
+
     @Autowired
     public FuncionarioService(FuncionarioRepository funcionarioRepository) {
         this.funcionarioRepository = funcionarioRepository;
