@@ -18,8 +18,8 @@ import java.util.List;
 public class Funcionario extends Pessoa{
     @NotNull(message = "O salário não pode ser nulo")
     @Basic(optional = false)
-    @Min(value = 0, message = "Data de nascimento está abaixo do valor minimo")
-    @Max(value = 100000, message = "Data de nascimento está acima do valor máximo")
+    @Min(value = 0, message = "O saláririo está abaixo do valor minimo")
+    @Max(value = 100000, message = "O saláririo está acima do valor máximo")
     @Column(name = "salario")
     private Double salario;
 

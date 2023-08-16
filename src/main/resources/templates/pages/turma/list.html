@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+<h1>Lista de Funções</h1>
+<div th:if="${!turma.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="turma: ${turma}" >
+            <td class="center" th:text="${turma.id}"></td>
+            <td class="center" th:text="${turma.turmanome}"></td>
+            <td>
+                <a th:href="@{/turma/view/{id}(id=${turma.id})}"><button type="button">Ver</button></a>
+                <a th:href="@{/turma/edit/{id}(id=${turma.id})}"><button type="button">Editar</button></a>
+                <a th:href="@{/turma/delete/{id}(id=${turma.id})}"><button type="button">Apagar</button></a>
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<div th:unless="${!turma.isEmpty()}">
+    <strong>Não existem registros a apresentar</strong>
+</div>
+<div>
+    <button type="button" onclick="window.location.href='/turma/new'">Inserir</button>
+</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

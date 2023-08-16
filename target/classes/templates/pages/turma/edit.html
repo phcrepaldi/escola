@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+<h1>Atualizar Funções</h1>
+            <table>
+            <div th:if="${sucesso}">
+    <span th:text="${sucesso}"></span>
+</div>
+<form th:action="@{/turma/{id}/edit(id=${turma.id})}" th:object="${turma}" method="post">
+    <input th:field="*{id}" type="hidden">
+    <!-- nome -->
+    <tr>
+    <div>
+        <td><label for="turmanome">Função</label></td>
+        <td><input type="text" id="turmanome" th:field="*{turmanome}">
+        <span th:if="${#fields.hasErrors('turmanome')}" th:errors="*{turmanome}"></span></td>
+    </div>
+    </tr>
+
+    <!-- botao -->
+    <tr>
+    <div>
+        <td><button type="submit">Submeter</button></td>
+        <td><button type="button" onclick="window.location.href='/turma/list'">Listar</button> </td>
+    </div>
+    </tr>
+</form>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

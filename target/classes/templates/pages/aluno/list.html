@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <h1>Lista de Alunos</h1>
+            <form th:action="@{/aluno/search}" method="get">
+                <label>Pesquise por Alunos:</label>
+                <input type="text" name="keyword">
+                <button type="submit">Pesquisar</button>
+                <br>
+                <br>
+            </form>
+            <div th:if="${!aluno.isEmpty()}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Apelido</th>
+                        <th>Data de Nascimento</th>
+                        <th>Gênero</th>
+                        <th>Email</th>
+                        <th>NIF</th>
+                        <th>Telefone</th>
+                        <th>Morada</th>
+                        <th>Responsável</th>
+                        <th>Turma</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="alu: ${aluno}" >
+                        <td class="center" th:text="${alu.id}"></td>
+                        <td class="center" th:text="${alu.nome}"></td>
+                        <td class="center" th:text="${alu.apelido}"></td>
+                        <td class="center" th:text="${#dates.format(alu.datanas, 'dd-MM-yyyy')}"></td>
+                        <td class="center" th:text="${alu.genero}"></td>
+                        <td class="center" th:text="${alu.email}">
+                        <td class="center" th:text="${alu.nif}"></td>
+                        <td class="center" th:text="${alu.telefone}"></td>
+                        <td class="center" th:text="${alu.morada}"></td>
+                        <td class="center" th:text="${alu.responsavel}"></td>
+                        <td class="center">
+                            <span th:each="turma : ${alu.turma}" th:text="${alu.turma.turmanome}"></span>
+                        </td>
+                        <td>
+<!--                            <a th:href="@{/aluno/view/{id}(id=${alu.id})}"><button type="button">Ver</button></a>-->
+                            <a th:href="@{/aluno/edit/{id}(id=${alu.id})}"><button type="button">Editar</button></a>
+                            <a th:href="@{/aluno/delete/{id}(id=${alu.id})}"><button type="button">Apagar</button></a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${!aluno.isEmpty()}">
+                <strong>Não existem registros a apresentar</strong>
+            </div>
+            <div>
+                <button type="button" onclick="window.location.href='/aluno/new'">Inserir</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
