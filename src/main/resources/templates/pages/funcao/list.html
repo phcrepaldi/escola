@@ -9,7 +9,11 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+<a th:href="@{/}"><button type="button">< Menu Principal</button></a>
 <h1>Lista de Funções</h1>
+<br>
+<div class="linha"></div>
+<br>
 <div th:if="${!funcao.isEmpty()}">
     <table>
         <thead>
@@ -33,6 +37,9 @@
         </tbody>
     </table>
 </div>
+<br>
+<div class="linha"></div>
+<br>
 <div th:unless="${!funcao.isEmpty()}">
     <strong>Não existem registros a apresentar</strong>
 </div>

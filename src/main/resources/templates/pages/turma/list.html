@@ -9,15 +9,19 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-<h1>Lista de Funções</h1>
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <h1>Lista de Turmas</h1>
 <div th:if="${!turma.isEmpty()}">
     <table>
         <thead>
         <tr>
             <th>ID</th>
-            <th>Função</th>
+            <th>Turma</th>
         </tr>
         </thead>
+        <br>
+        <div class="linha"></div>
+        <br>
         <tbody>
         <tr th:each="turma: ${turma}" >
             <td class="center" th:text="${turma.id}"></td>
@@ -33,6 +37,9 @@
         </tbody>
     </table>
 </div>
+<br>
+<div class="linha"></div>
+<br>
 <div th:unless="${!turma.isEmpty()}">
     <strong>Não existem registros a apresentar</strong>
 </div>

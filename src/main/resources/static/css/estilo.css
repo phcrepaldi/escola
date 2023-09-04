@@ -62,9 +62,9 @@ button {
 
 .interna {
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding: 20px;
+    padding: 15px;
 
 /*     margin-left: 35px;
     margin-top: 15px; */
@@ -76,7 +76,7 @@ input {
 }
 
 th{
-    min-width: 100px;
+    min-width: 80px;
 }
 
 
@@ -93,4 +93,8 @@ td {
 
 .center {
     text-align: center;
+}
+
+.linha {
+    border: solid 1px white;
 }

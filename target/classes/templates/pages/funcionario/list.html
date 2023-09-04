@@ -9,12 +9,15 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
             <h1>Lista de Funcionários</h1>
             <form th:action="@{/funcionario/search}" method="get">
                 <label>Pesquise por Funcionários:</label>
                 <input type="text" name="keyword">
                 <button type="submit">Pesquisar</button>
                 <br>
+                <br>
+                <div class="linha"></div>
                 <br>
             </form>
             <div th:if="${!funcionario.isEmpty()}">
@@ -59,6 +62,9 @@
                     </tbody>
                 </table>
             </div>
+            <br>
+            <div class="linha"></div>
+            <br>
             <div th:unless="${!funcionario.isEmpty()}">
                 <strong>Não existem registros a apresentar</strong>
             </div>

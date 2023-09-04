@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inserir Funcionarios</title>
+    <title>Inserir Alunos</title>
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <h1>Inserir Funcionários</h1>
+            <h1>Inserir Alunos</h1>
             <table>
                 <form th:action="@{/aluno/save}" th:object="${aluno}" method="post">
                     <!-- nome -->
@@ -103,7 +103,7 @@
                     <!-- turma -->
                     <tr>
                         <div>
-                            <td><label for="turmanome">Função</label></td>
+                            <td><label for="turmanome">Turma</label></td>
                             <td>
                                 <select id="turmanome" name="turmanome" th:field="*{turma}">
                                     <option th:each="t : ${turmas}" th:value="${t.id}" th:text="${t.turmanome}"></option>
