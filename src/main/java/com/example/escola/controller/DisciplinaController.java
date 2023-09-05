@@ -39,7 +39,7 @@ public class DisciplinaController {
         }
         return "redirect:/disciplinas/list";
     }
-    @GetMapping
+    @GetMapping("/disciplinas/new")
     public String addDisciplina(Model model){
         model.addAttribute("disciplina", new Disciplina());
 

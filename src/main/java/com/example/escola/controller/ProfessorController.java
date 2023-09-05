@@ -26,10 +26,10 @@ public class ProfessorController {
         this.disciplinaService=disciplinaService;
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "pages/index";
-    }
+//    @GetMapping("/index")
+//    public String index() {
+//        return "pages/index";
+//    }
 
     @GetMapping("/professores/list")
     public String getAllProfessores(Model model){
