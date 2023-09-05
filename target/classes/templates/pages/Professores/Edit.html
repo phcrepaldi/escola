@@ -62,10 +62,10 @@
                                 <span th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></span>
                         </div>
                         <div>
-                            <lable>Disciplinas:</lable>
+                            <label>Disciplinas:</label>
                             <div th:each="disciplina : ${allDisciplinas}">
                                 <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
-                                <lable th:text="${disciplina.nomeDisciplina}"></lable>
+                                <label th:text="${disciplina.nomeDisciplina}"></label>
                             </div>
                         </div>
                         <div>
