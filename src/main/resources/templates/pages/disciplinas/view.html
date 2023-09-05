@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver Disciplina</title>
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+  <div class="principal">
+    <div class="interna">
+      <h1>Dados da Disciplina</h1>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome da Disciplina</th>
+          <th>Programa da Disciplina</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td th:text="${disciplina.id}"></td>
+          <td th:text="${disciplina.nomeDisciplina}"></td>
+          <td th:text="${disciplina.programaDisciplina}"></td>
+        </tr>
+        <tr>
+          <td><a class="button" th:href="@{/index}">Voltar ao Menu</a></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Disciplinas</title>
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<div class="anterior">
+  <div class="principal">
+    <div class="interna">
+      <h1>Atualizar Disciplina</h1>
+      <div th:if="${sucesso}">
+        <span th:text="${sucesso}"></span>
+      </div>
+      <form th:action="@{/disciplinas/edit/{id}(id=${disciplina.id})}" th:object="${disciplina}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div>
+          <label for="nomeDisciplina">Nome da Disciplina</label>
+          <input type="text" id="nomeDisciplina" th:field="*{nomeDisciplina}">
+          <span th:if="${#fields.hasErrors('nomeDisciplina')}" th:errors="*{nomeDisciplina}"></span>
+        </div>
+        <div>
+          <td><label for="programaDisciplina">Programa da Disciplina</label></td>
+          <td><input type="text" id="programaDisciplina" th:field="*{programaDisciplina}">
+            <span th:if="${#fields.hasErrors('programaDisciplinao')}" th:errors="*{programaDisciplina}"></span></td>
+        </div>
+
+        <div>
+          <button type="submit">Submeter</button>
+          <div>
+            <button class="button"><a th:href="@{/}">Voltar ao Menu</a></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir Disciplinas</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <h1>Inserir Disciplinas</h1>
+            <table>
+                <form th:action="@{/disciplinas/save}" th:object="${disciplina}" method="post">
+                    <tr>
+                        <div>
+                            <td><label for="nomeDisciplina">Nome da Disciplina</label></td>
+                            <td><input type="text" id="nomeDisciplina" th:field="*{nomeDisciplina}">
+                                <span th:if="${#fields.hasErrors('nomeDisciplina')}" th:errors="*{nomeDisciplina}"></span></td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div>
+                            <td><label for="programaDisciplina">Programa da Disciplina</label></td>
+                            <td><input type="text" id="programaDisciplina" th:field="*{programaDisciplina}">
+                                <span th:if="${#fields.hasErrors('programaDisciplina')}" th:errors="*{programaDisciplina}"></span></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div>
+                            <td><button type="submit">Submeter</button></td>
+                            <!--<td><button type="button" onclick="window.location.href='/autor/list'">Listar</button></td>-->
+                        </div>
+                    </tr>
+                </form>
+                <tr>
+                    <td><a class="button" th:href="@{/index}">Voltar ao Menu</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

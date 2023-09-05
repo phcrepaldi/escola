@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>O meu site</title>
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<h1>Escola Artística do Porto</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Opções</th>
+    <th>Novo</th>
+    <th>Listar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th>Cursos
+    <td><a th:href="@{/cursos/new}">Inserir Curso</a></td>
+    <td><a th:href="@{/cursos/list}">Ver Curso</a></td>
+    </th>
+  </tr>
+  <tr>
+    <th>Disciplinas
+    <td><a th:href="@{/disciplinas/new}">Inserir Disciplina</a></td>
+    <td><a th:href="@{/disciplinas/list}">Ver Disciplinas</a></td>
+    </th>
+  </tr>
+  <tr>
+    <th>Professores
+    <td><a th:href="@{/professores/new}">Inserir Professor</a></td>
+    <td><a th:href="@{/professores/list}">Ver Professores</a></td>
+    </th>
+  </tr>
+  <tr>
+    <th>Funcionários
+    <td><a th:href="@{/funcionario/new}">Inserir Funcionário</a></td>
+    <td><a th:href="@{/funcionario/list}">Ver Funcionários</a></td>
+    </th>
+  </tr>
+  <tr>
+    <th>Alunos
+    <td><a th:href="@{/alunos/new}">Inserir Aluno</a></td>
+    <td><a th:href="@{/alunos/list}">Ver Aluno</a></td>
+    </th>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Disciplinas</title>
+  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+  <div class="principal">
+    <div class="interna">
+      <h1>Listar Disciplinas</h1>
+
+      <form th:action="@{/disciplinas/search}" method="get">
+        <lable>Pesquise por Disciplina:</lable>
+        <input type="text" name="keyword" th:value="${keyword}">
+        <br>
+        <br>
+        <button type="submit">Pesquisar</button>
+      </form>
+      <div th:if="${!disciplinas.isEmpty()}">
+        <table>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome da Disciplina</th>
+            <th>Programa da Disciplina</th>
+            <th>Ações</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="disciplina: ${disciplinas}">
+            <td th:text="${disciplina.id}"></td>
+            <td th:text="${disciplina.nomeDisciplina}"></td>
+            <td th:text="${disciplina.programaDisciplina}"></td>
+            <td>
+              <a class="button" th:href="@{/disciplinas/edit/{id}(id=${disciplina.id})}">Editar</a>
+              <a class="button" th:href="@{/disciplinas/delete/{id}(id=${disciplina.id})}">Apagar</a>
+            </td>
+          </tr>
+          <tr>
+            <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>
+          </tr>
+        </table>
+      </div>
+      <div th:unless="${!disciplinas.isEmpty()}"><strong>Não existem registos a apresentar.</strong></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
