@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+    <div class="anterior">
+        <div class="principal">
+            <div class="interna">
+                <h1>Escola de Artes do Porto</h1>
+                <div class="linha"></div>
+                <br>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Opções</th>
+                                <th>Operações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="center">
+                                    Turmas
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/turma/new}"><button type="button">Inserir</button></a>
+                                    <a th:href="@{/turma/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="center">
+                                    Disciplinas
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/disciplinas/new}" ><button type="button">Inserir</button></a>
+                                    <a th:href="@{/disciplinas/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
+                                    Professores
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/professores/new}" ><button type="button">Inserir</button></a>
+                                    <a th:href="@{/professores/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
+                                    Funcionários
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/funcionario/new}" ><button type="button">Inserir</button></a>
+                                    <a th:href="@{/funcionario/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
+                                    Funções
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/funcao/new}" ><button type="button">Inserir</button></a>
+                                    <a th:href="@{/funcao/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
+                                    Alunos
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/aluno/new}" ><button type="button">Inserir</button></a>
+                                    <a th:href="@{/aluno/list}"><button type="button">Listar</button></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

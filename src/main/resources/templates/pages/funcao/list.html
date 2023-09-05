@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+<a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+<h1>Lista de Funções</h1>
+<br>
+<div class="linha"></div>
+<br>
+<div th:if="${!funcao.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcao: ${funcao}" >
+            <td class="center" th:text="${funcao.id}"></td>
+            <td class="center" th:text="${funcao.funcaonome}"></td>
+            <td>
+                <a th:href="@{/funcao/view/{id}(id=${funcao.id})}"><button type="button">Ver</button></a>
+                <a th:href="@{/funcao/edit/{id}(id=${funcao.id})}"><button type="button">Editar</button></a>
+                <a th:href="@{/funcao/delete/{id}(id=${funcao.id})}"><button type="button">Apagar</button></a>
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<br>
+<div class="linha"></div>
+<br>
+<div th:unless="${!funcao.isEmpty()}">
+    <strong>Não existem registros a apresentar</strong>
+</div>
+<div>
+    <button type="button" onclick="window.location.href='/funcao/new'">Inserir</button>
+</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

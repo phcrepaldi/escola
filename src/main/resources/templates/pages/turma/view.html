@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Turma</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="center" th:text="${turma.id}"></td>
+                    <td class="center" th:text="${turma.turmanome}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div>
+                <button type="button" onclick="window.location.href='/turma/list'">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

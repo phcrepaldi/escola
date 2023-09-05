@@ -1,10 +1,7 @@
 package com.example.escola.model;
 
 import com.example.escola.enums.Genero;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -12,18 +9,25 @@ import org.hibernate.validator.constraints.Length;
 import jakarta.validation.constraints.NotNull;
 
 
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "funcionario")
 public class Funcionario extends Pessoa{
     @NotNull(message = "O salário não pode ser nulo")
     @Basic(optional = false)
-    @Min(value = 0, message = "Data de nascimento está abaixo do valor minimo")
-    @Max(value = 100000, message = "Data de nascimento está acima do valor máximo")
+    @Min(value = 0, message = "O saláririo está abaixo do valor minimo")
+    @Max(value = 100000, message = "O saláririo está acima do valor máximo")
     @Column(name = "salario")
     private Double salario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "funcao_id", nullable = false)
+    private Funcao funcao;
+
+
 
     public Funcionario() {
     }
@@ -39,5 +43,13 @@ public class Funcionario extends Pessoa{
 
     public void setSalario(Double salario) {
         this.salario = salario;
+    }
+
+    public Funcao getFuncao() {
+        return funcao;
+    }
+
+    public void setFuncao(Funcao funcao) {
+        this.funcao = funcao;
     }
 }

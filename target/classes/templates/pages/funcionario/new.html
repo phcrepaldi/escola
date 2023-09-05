@@ -32,7 +32,7 @@
                                 <span th:if="${#fields.hasErrors('apelido')}" th:errors="*{apelido}"></span></td>
                         </div>
                     </tr>
-                    <!-- idade -->
+                    <!-- datanas -->
                     <tr>
                         <div>
                             <td><label for="datanas">Data de Nascimento</label>
@@ -100,11 +100,26 @@
                         </div>
                     </tr>
 
+                    <!-- funcao -->
+                    <tr>
+                        <div>
+                            <td><label for="funcaonome">Função</label></td>
+                            <td>
+                                <select id="funcaonome" name="funcaonome" th:field="*{funcao}">
+                                    <option th:each="f : ${funcoes}" th:value="${f.id}" th:text="${f.funcaonome}"></option>
+                                </select>
+
+                                <span th:if="${#fields.hasErrors('funcao.funcaonome')}" th:errors="*{funcao.funcaonome}"></span>
+                            </td>
+                        </div>
+
+                    </tr>
+
                     <!-- botao -->
                     <tr>
                         <div>
                             <td><button type="submit">Submeter</button></td>
-                            <!--<td><button type="button" onclick="window.location.href='/autor/list'">Listar</button></td>-->
+                            <td><button type="button" onclick="window.location.href='/funcionario/list'">Listar</button> </td>
                         </div>
                     </tr>
                 </form>

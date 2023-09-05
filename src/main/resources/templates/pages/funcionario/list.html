@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="anterior">
+    <div class="principal">
+        <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <h1>Lista de Funcionários</h1>
+            <form th:action="@{/funcionario/search}" method="get">
+                <label>Pesquise por Funcionários:</label>
+                <input type="text" name="keyword">
+                <button type="submit">Pesquisar</button>
+                <br>
+                <br>
+                <div class="linha"></div>
+                <br>
+            </form>
+            <div th:if="${!funcionario.isEmpty()}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Apelido</th>
+                        <th>Data de Nascimento</th>
+                        <th>Gênero</th>
+                        <th>Email</th>
+                        <th>NIF</th>
+                        <th>Telefone</th>
+                        <th>Morada</th>
+                        <th>Salário</th>
+                        <th>Função</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="func: ${funcionario}" >
+                        <td class="center" th:text="${func.id}"></td>
+                        <td class="center" th:text="${func.nome}"></td>
+                        <td class="center" th:text="${func.apelido}"></td>
+                        <td class="center" th:text="${#dates.format(func.datanas, 'dd-MM-yyyy')}"></td>
+                        <td class="center" th:text="${func.genero}"></td>
+                        <td class="center" th:text="${func.email}">
+                        <td class="center" th:text="${func.nif}"></td>
+                        <td class="center" th:text="${func.telefone}"></td>
+                        <td class="center" th:text="${func.morada}"></td>
+                        <td class="center" th:text="${func.salario}"></td>
+                        <td class="center">
+                            <span th:each="funcao : ${func.funcao}" th:text="${func.funcao.funcaonome}"></span>
+                        </td>
+                        <td>
+<!--                            <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>-->
+                            <a th:href="@{/funcionario/edit/{id}(id=${func.id})}"><button type="button">Editar</button></a>
+                            <a th:href="@{/funcionario/delete/{id}(id=${func.id})}"><button type="button">Apagar</button></a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="linha"></div>
+            <br>
+            <div th:unless="${!funcionario.isEmpty()}">
+                <strong>Não existem registros a apresentar</strong>
+            </div>
+            <div>
+                <button type="button" onclick="window.location.href='/funcionario/new'">Inserir</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
