@@ -21,12 +21,12 @@ public class ProfessorController {
 
     private final DisciplinaService disciplinaService;
     @Autowired
-    public ProfessorController(ProfessorService professorService){
+    public ProfessorController(ProfessorService professorService, DisciplinaService disciplinaService){
         this.professorService=professorService;
         this.disciplinaService=disciplinaService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String index() {
         return "pages/index";
     }
