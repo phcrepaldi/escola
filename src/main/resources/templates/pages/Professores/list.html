@@ -32,6 +32,7 @@
                     <th>Telefone</th>
                     <th>Morada</th>
                     <th>Salário</th>
+                    <th>Disciplinas</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -48,12 +49,18 @@
                     <td th:text="${professor.morada}"></td>
                     <td th:text="${professor.salario}"></td>
                     <td>
+                        <div th:each="disciplina:${professor.disciplinas}">
+                            <input type="checkbox" th:value="${disciplina.id}" checked disabled>
+                            <label th:text="${disciplina.nomeDisciplina}"></label>
+                        </div>
+                    </td>
+                    <td>
                         <a class="button" th:href="@{/professores/edit/{id}(id=${professor.id})}">Editar</a>
                         <a class="button" th:href="@{/professores/delete/{id}(id=${professor.id})}">Apagar</a>
                     </td>
                 </tr>
                 <tr>
-                    <td><a class="button" th:href="@{/index}">Voltar ao Menu</a></td>
+                    <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>
                 </tr>
             </table>
             </div>

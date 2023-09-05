@@ -23,6 +23,7 @@
             <th>Telefone</th>
             <th>Morada</th>
             <th>Salário</th>
+            <th>Disciplinas</th>
           </tr>
           </thead>
           <tbody>
@@ -37,6 +38,14 @@
             <td th:text="${professor.telefone}"></td>
             <td th:text="${professor.morada}"></td>
             <td th:text="${professor.salario}"></td>
+            <td>
+                <div th:each="disciplina:${disciplinas}">
+                    <div>
+                        <input type="checkbox" th:value="${disciplina.id}" checked disabled>
+                        <lable th:text="${disciplina.nomeDisciplina}"></lable>
+                    </div>
+                </div>
+            </td>
           </tr>
           <tr>
             <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>

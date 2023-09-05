@@ -46,7 +46,7 @@ public class ProfessorController {
 
         if(professor.isPresent()){
             model.addAttribute("professor", professor.get());
-            //model.addAttribute("disciplina", disciplinaService.getDisciplinaById(id));
+            model.addAttribute("disciplinas", disciplinaService.getDisciplinasByProfessor(professor.get()));
 
             return "pages/professores/vew";
         }
@@ -57,7 +57,7 @@ public class ProfessorController {
     public String addProfessor(Model model){
         model.addAttribute("professor", new Professor());
         model.addAttribute("generos", Genero.values());
-        //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+        model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
 
         return "pages/professores/new";
 
@@ -68,7 +68,7 @@ public class ProfessorController {
                                 BindingResult result, Model model){
         if(result.hasErrors()){
             model.addAttribute("generos", Genero.values());
-            //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/new";
         }
 
@@ -91,7 +91,7 @@ public class ProfessorController {
             Professor professor = optionalProfessor.get();
             model.addAttribute("professor", optionalProfessor.get());
             model.addAttribute("generos", Genero.values());
-            //model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
 
             return "pages/professores/edit";
         }
@@ -104,14 +104,14 @@ public class ProfessorController {
                                BindingResult result, Model model){
         if(result.hasErrors()){
             model.addAttribute("generos", Genero.values());
-            //model.addAttribute("disciolinas", disciplinaService.getAllDisciplinas());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/edit";
         }
         Professor updateProfessor=professorService.updateProfessor(id, professor);
 
         if(updateProfessor!=null){
-            //model.addAttribute("disciplina",disciplinaService.getAllDiscipinas());
-            model.addAttribute("sexos", Genero.values());
+            model.addAttribute("disciplinas",disciplinaService.getAllDisciplinas());
+            model.addAttribute("generos", Genero.values());
             model.addAttribute("sucesso", "Modelo atualizado com sucesso");
             return "pages/professores/edit";
         }

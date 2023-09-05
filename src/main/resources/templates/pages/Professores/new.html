@@ -100,11 +100,11 @@
             </div>
           </tr>
           <tr>
-            <lable>Disciplinas:</lable>
+            <label>Disciplinas:</label>
             <div th:each="disciplina : ${disciplinas}">
               <div>
                 <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
-                <lable th:text="${disciplina.nomeDisciplina}"></lable>
+                <label th:text="${disciplina.nomeDisciplina}"></label>
               </div>
             </div>
           </tr>

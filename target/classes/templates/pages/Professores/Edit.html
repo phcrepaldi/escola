@@ -62,6 +62,13 @@
                                 <span th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></span>
                         </div>
                         <div>
+                            <lable>Disciplinas:</lable>
+                            <div th:each="disciplina : ${allDisciplinas}">
+                                <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
+                                <lable th:text="${disciplina.nomeDisciplina}"></lable>
+                            </div>
+                        </div>
+                        <div>
                             <button type="submit">Submeter</button>
                             <div>
                                 <button class="button"><a th:href="@{/}">Voltar ao Menu</a></button>

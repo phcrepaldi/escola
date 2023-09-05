@@ -82,6 +82,7 @@ public class DisciplinaController {
         }
     }
 
+    @GetMapping("disciplinas/delete/{id}")
     public String deleteDisciplina(@PathVariable("id") Long id){
         disciplinaService.deleteDisciplina(id);
 
