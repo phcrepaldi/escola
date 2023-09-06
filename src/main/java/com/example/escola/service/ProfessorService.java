@@ -44,7 +44,7 @@ public class ProfessorService {
             _professor.setTelefone(professor.getTelefone());
             _professor.setMorada(professor.getMorada());
             _professor.setSalario(professor.getSalario());
-            //_professor.setDisciplina(professor.getDisciplina());
+            _professor.setDisciplinas(professor.getDisciplinas());
 
             return professorRepository.save(_professor);
         }

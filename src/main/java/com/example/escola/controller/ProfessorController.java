@@ -91,7 +91,7 @@ public class ProfessorController {
             Professor professor = optionalProfessor.get();
             model.addAttribute("professor", optionalProfessor.get());
             model.addAttribute("generos", Genero.values());
-            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
 
             return "pages/professores/edit";
         }
@@ -104,13 +104,13 @@ public class ProfessorController {
                                BindingResult result, Model model){
         if(result.hasErrors()){
             model.addAttribute("generos", Genero.values());
-            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/edit";
         }
         Professor updateProfessor=professorService.updateProfessor(id, professor);
 
         if(updateProfessor!=null){
-            model.addAttribute("disciplinas",disciplinaService.getAllDisciplinas());
+            model.addAttribute("allDisciplinas",disciplinaService.getAllDisciplinas());
             model.addAttribute("generos", Genero.values());
             model.addAttribute("sucesso", "Modelo atualizado com sucesso");
             return "pages/professores/edit";
