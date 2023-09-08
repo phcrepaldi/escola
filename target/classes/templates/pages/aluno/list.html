@@ -35,6 +35,8 @@
                         <th>Morada</th>
                         <th>Responsável</th>
                         <th>Turma</th>
+                        <th>Disciplinas</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,12 @@
                         <td class="center" th:text="${alu.responsavel}"></td>
                         <td class="center">
                             <span th:each="turma : ${alu.turma}" th:text="${alu.turma.turmanome}"></span>
+                        </td>
+                        <td>
+                            <div th:each="disciplina:${alu.disciplinas}">
+                                <input type="checkbox" th:value="${disciplina.id}" checked disabled>
+                                <label th:text="${disciplina.nomeDisciplina}"></label>
+                            </div>
                         </td>
                         <td>
 <!--                            <a th:href="@{/aluno/view/{id}(id=${alu.id})}"><button type="button">Ver</button></a>-->

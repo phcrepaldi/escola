@@ -41,6 +41,8 @@ public class AlunoService {
             _aluno.setMorada(aluno.getMorada());
             _aluno.setResponsavel(aluno.getResponsavel());
             _aluno.setTurma(aluno.getTurma());
+            _aluno.setDisciplinas(aluno.getDisciplinas());
+
 
             return alunoRepository.save(_aluno);
         }

@@ -7,6 +7,7 @@ import com.example.escola.model.Turma;
 import com.example.escola.repository.FuncaoRepository;
 import com.example.escola.repository.AlunoRepository;
 import com.example.escola.repository.TurmaRepository;
+import com.example.escola.service.DisciplinaService;
 import com.example.escola.service.FuncaoService;
 import com.example.escola.service.AlunoService;
 import com.example.escola.service.TurmaService;
@@ -28,6 +29,8 @@ import java.util.Optional;
 public class AlunoController {
 
     private final AlunoService alunoService;
+    private final DisciplinaService disciplinaService;
+
 
     private TurmaService turmaService;
 
@@ -35,14 +38,17 @@ public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository; // Declare AlunoRepository
 
+
     @Autowired
     private TurmaRepository turmaRepository; // Declare TurmaRepository
 
 
     @Autowired
-    public AlunoController(AlunoService alunoService, TurmaService turmaService) {
+    public AlunoController(AlunoService alunoService, TurmaService turmaService, DisciplinaService disciplinaService) {
         this.alunoService = alunoService;
         this.turmaService = turmaService;
+        this.disciplinaService=disciplinaService;
+
     }
 
     @GetMapping("/aluno/list")
@@ -66,6 +72,8 @@ public class AlunoController {
         model.addAttribute("aluno", new Aluno());
         model.addAttribute("generos", Genero.values());
         model.addAttribute("turmas", turmaService.getAllTurma());
+        model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+
         return "pages/aluno/new";
     }
 
@@ -89,12 +97,16 @@ public class AlunoController {
         if (alunoResult.hasErrors()){
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+
             return "pages/aluno/new";
         }
 
         if (aluno.getTurma().getTurmanome() == null || aluno.getTurma().getTurmanome().isEmpty()) {
             alunoResult.rejectValue("turma.turmanome", "field.required", "A turma é obrigatória.");
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+
             return "pages/aluno/new";
         }
 
@@ -102,6 +114,8 @@ public class AlunoController {
         if (turmaId == null) {
             alunoResult.rejectValue("turma.id", "field.required", "A turma é obrigatória.");
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+
             return "pages/aluno/new";
         }
 
@@ -138,6 +152,8 @@ public class AlunoController {
             model.addAttribute("aluno", aluno.get());
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
+
 
 
             return "pages/aluno/edit";
@@ -150,6 +166,8 @@ public class AlunoController {
         if (result.hasErrors()){
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
+
 
             return "pages/aluno/edit";
         }
@@ -158,10 +176,14 @@ public class AlunoController {
 
         if (updatedAluno == null){
             model.addAttribute("generos", Genero.values());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
+
             return "pages/aluno/edit";
         }else{
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
+
             model.addAttribute("sucesso", "Aluno atualizado com sucesso!");
             return "pages/aluno/edit";   //return "redirect:/aluno/list";
         }

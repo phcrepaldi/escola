@@ -114,16 +114,16 @@
                         </div>
 
                     </tr>
-                    <!-- disciplinas
-                    <tr>
-                        <div>
-                            <td><label>Disciplinas:</label></td>
-
-                            <td><div th:each="disciplina : ${disciplinas}">
-                                <input type="checkbox" th:field="*{nomeDisciplina}" th:value="${disciplina.id}">
-                                <label th:text="${disciplina.nomeDisciplina}"></label>
-                            </div></td>
-                    </tr>-->
+                    <!-- disciplinas -->
+                  <tr>
+                    <label>Disciplinas:</label>
+                    <div th:each="disciplina : ${disciplinas}">
+                      <div>
+                        <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
+                        <label th:text="${disciplina.nomeDisciplina}"></label>
+                      </div>
+                    </div>
+                  </tr>
                     <!-- botao -->
                     <tr>
                         <div>

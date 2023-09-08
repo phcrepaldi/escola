@@ -115,6 +115,15 @@
                         </div>
                     </tr>
 
+                    <!-- disciplina -->
+                    <div>
+                        <label>Disciplinas:</label>
+                        <div th:each="disciplina : ${allDisciplinas}">
+                            <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
+                            <label th:text="${disciplina.nomeDisciplina}"></label>
+                        </div>
+                    </div>
+
                     <!-- botao -->
                     <tr>
                         <div>

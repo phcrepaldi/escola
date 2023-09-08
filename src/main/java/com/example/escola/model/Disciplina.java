@@ -21,6 +21,9 @@ public class Disciplina extends BaseEntity{
     @ManyToMany(mappedBy = "disciplinas")
     private List<Professor> professores=new ArrayList<>();
 
+    @ManyToMany(mappedBy = "disciplinas")
+    private List<Aluno> alunos=new ArrayList<>();
+
     public Disciplina (){};
 
     public Disciplina(Long id, String nomeDisciplina, String programaDisciplina) {
@@ -40,6 +43,10 @@ public class Disciplina extends BaseEntity{
     public List<Professor> getProfessores(){return professores;}
 
     public void setProfessores(List<Professor> professores){this.professores=professores;}
+
+    public List<Aluno> getAlunos(){return alunos;}
+
+    public void setAlunos(List<Aluno> alunos){this.alunos=alunos;}
 
 
 }

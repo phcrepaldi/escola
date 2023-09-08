@@ -8,7 +8,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "aluno")
@@ -24,7 +26,13 @@ public class Aluno extends Pessoa{
     @JoinColumn(name = "turma_id", nullable = false)
     private Turma turma;
 
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name="alunos_disciplinas",
+            joinColumns = @JoinColumn(name="aluno_id"),
+            inverseJoinColumns = @JoinColumn(name="disciplina_id")
+    )
+    private List<Disciplina> disciplinas=new ArrayList<>();
 
     public Aluno() {
     }
@@ -49,5 +57,9 @@ public class Aluno extends Pessoa{
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
+
+    public List<Disciplina> getDisciplinas() {return disciplinas;}
+
+    public void setDisciplinas(List<Disciplina> disciplinas){this.disciplinas=disciplinas;}
 
 }
