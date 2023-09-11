@@ -39,7 +39,7 @@ public class AlunoService {
             _aluno.setNif(aluno.getNif());
             _aluno.setTelefone(aluno.getTelefone());
             _aluno.setMorada(aluno.getMorada());
-            _aluno.setResponsavel(aluno.getResponsavel());
+            _aluno.setDiretor(aluno.getDiretor());
             _aluno.setTurma(aluno.getTurma());
             _aluno.setDisciplinas(aluno.getDisciplinas());
 
