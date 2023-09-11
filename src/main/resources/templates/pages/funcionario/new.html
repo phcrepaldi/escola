@@ -9,7 +9,11 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+
             <h1>Inserir Funcionários</h1>
+            <div class="linha"></div>
+            <br>
             <table>
                 <form th:action="@{/funcionario/save}" th:object="${funcionario}" method="post">
                     <!-- nome -->
@@ -119,7 +123,7 @@
                     <tr>
                         <div>
                             <td><button type="submit">Submeter</button></td>
-                            <td><button type="button" onclick="window.location.href='/funcionario/list'">Listar</button> </td>
+<!--                            <td><button type="button" onclick="window.location.href='/funcionario/list'">Listar</button> </td>-->
                         </div>
                     </tr>
                 </form>

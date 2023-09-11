@@ -11,6 +11,8 @@
         <div class="interna">
             <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
             <h1>Inserir Disciplinas</h1>
+            <div class="linha"></div>
+            <br>
             <table>
                 <form th:action="@{/disciplinas/save}" th:object="${disciplina}" method="post">
                     <tr>

@@ -9,7 +9,11 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+
             <h1>Inserir Alunos</h1>
+            <div class="linha"></div>
+            <br>
             <table>
                 <form th:action="@{/aluno/save}" th:object="${aluno}" method="post">
                     <!-- nome -->
@@ -116,19 +120,20 @@
                     </tr>
                     <!-- disciplinas -->
                   <tr>
-                    <label>Disciplinas:</label>
-                    <div th:each="disciplina : ${disciplinas}">
+
+                      <td><label>Disciplinas:</label></td>
+                      <td><div th:each="disciplina : ${disciplinas}">
                       <div>
                         <input type="checkbox" th:field="*{disciplinas}" th:value="${disciplina.id}">
                         <label th:text="${disciplina.nomeDisciplina}"></label>
                       </div>
-                    </div>
+                    </div></td>
                   </tr>
                     <!-- botao -->
                     <tr>
                         <div>
                             <td><button type="submit">Submeter</button></td>
-                            <td><button type="button" onclick="window.location.href='/aluno/list'">Listar</button> </td>
+<!--                            <td><button type="button" onclick="window.location.href='/aluno/list'">Listar</button> </td>-->
                         </div>
                     </tr>
                 </form>
