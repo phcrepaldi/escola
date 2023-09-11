@@ -9,7 +9,9 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <h1>Atualizar Autores</h1>
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+
+            <h1>Atualizar Funcionário</h1>
             <table>
                 <div th:if="${sucesso}">
                     <span th:text="${sucesso}"></span>
@@ -119,7 +121,7 @@
                     <tr>
                         <div>
                             <td><button type="submit">Submeter</button></td>
-                            <td><button type="button" onclick="window.location.href='/funcionario/list'">Listar</button> </td>
+<!--                            <td><button type="button" onclick="window.location.href='/funcionario/list'">Listar</button> </td>-->
                         </div>
                     </tr>
                 </form>

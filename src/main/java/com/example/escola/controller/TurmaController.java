@@ -1,6 +1,7 @@
 package com.example.escola.controller;
 
 
+import com.example.escola.model.Disciplina;
 import com.example.escola.model.Turma;
 import com.example.escola.service.TurmaService;
 import jakarta.validation.Valid;
@@ -77,11 +78,36 @@ public class TurmaController {
     public String updateFuncionario(@PathVariable("id") Long id, @Valid Turma turma, BindingResult result, Model model){
 
         Turma updatedTurma = turmaService.updateTurma(id, turma);
-        if (updatedTurma== null){
+//        if (updatedTurma== null){
+//            return "pages/turma/edit";
+//        }
+//        return "redirect:/turma/list";
+
+
+        if(result.hasErrors()){
             return "pages/turma/edit";
         }
-        return "redirect:/turma/list";
+        Turma updateDisciplina=turmaService.updateTurma(id, turma);
+        if(updatedTurma==null){
+            model.addAttribute("erro", "Algo correu mal.");
+            return "pages/turma/edit";
+        }else{
+            model.addAttribute("sucesso", "Turma atualizada com sucesso.");
+            return "pages/turma/edit";
+        }
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 }

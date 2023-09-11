@@ -9,6 +9,7 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
             <h1>Inserir Disciplinas</h1>
             <table>
                 <form th:action="@{/disciplinas/save}" th:object="${disciplina}" method="post">
@@ -34,9 +35,9 @@
                         </div>
                     </tr>
                 </form>
-                <tr>
-                    <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>-->
+<!--                </tr>-->
             </table>
         </div>
     </div>

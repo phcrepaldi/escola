@@ -9,14 +9,18 @@
 <div class="anterior">
     <div class="principal">
         <div class="interna">
+            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+
             <h1>Listar Professores</h1>
 
             <form th:action="@{/professores/search}" method="get">
                 <lable>Pesquise por Professor:</lable>
                 <input type="text" name="keyword" th:value="${keyword}">
-                <br>
-                <br>
                 <button type="submit">Pesquisar</button>
+                <br>
+                <br>
+                <div class="linha"></div>
+                <br>
             </form>
             <div th:if="${!professores.isEmpty()}">
             <table>
@@ -54,16 +58,24 @@
                             <label th:text="${disciplina.nomeDisciplina}"></label>
                         </div>
                     </td>
+<!--                    <td>-->
+<!--                        <a class="button" th:href="@{/professores/edit/{id}(id=${professor.id})}">Editar</a>-->
+<!--                        <a class="button" th:href="@{/professores/delete/{id}(id=${professor.id})}">Apagar</a>-->
+<!--                    </td>-->
                     <td>
-                        <a class="button" th:href="@{/professores/edit/{id}(id=${professor.id})}">Editar</a>
-                        <a class="button" th:href="@{/professores/delete/{id}(id=${professor.id})}">Apagar</a>
+                        <!--                            <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>-->
+                        <a th:href="@{/professores/edit/{id}(id=${professor.id})}"><button type="button">Editar</button></a>
+                        <a th:href="@{/professores/delete/{id}(id=${professor.id})}"><button type="button">Apagar</button></a>
                     </td>
                 </tr>
-                <tr>
-                    <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>-->
+<!--                </tr>-->
             </table>
             </div>
+            <br>
+            <div class="linha"></div>
+            <br>
             <div th:unless="${!professores.isEmpty()}"><strong>Não existem registos a apresentar.</strong></div>
         </div>
     </div>
