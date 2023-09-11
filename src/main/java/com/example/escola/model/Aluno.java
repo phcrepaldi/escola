@@ -16,11 +16,11 @@ import java.util.List;
 @Table(name = "aluno")
 public class Aluno extends Pessoa{
 
-    @NotBlank(message = "O responsável é obrigatório")
+    @NotBlank(message = "O diretor de turma é obrigatório")
     //@Basic(optional = false)
     @Length(min = 1, max = 128, message = "Nome deve ter entre 1 e 128 caracteres")
-    @Column(name = "responsavel")
-    private String responsavel;
+    @Column(name = "diretor")
+    private String diretor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "turma_id", nullable = false)
@@ -37,17 +37,17 @@ public class Aluno extends Pessoa{
     public Aluno() {
     }
 
-    public Aluno(Long id, String nome, String apelido, Date dataNascimento, Genero genero, String email, String nif, String telefone, String morada, String responsavel) {
+    public Aluno(Long id, String nome, String apelido, Date dataNascimento, Genero genero, String email, String nif, String telefone, String morada, String diretor) {
         super(id, nome, apelido, dataNascimento, genero, email, nif, telefone, morada);
-        this.responsavel = responsavel;
+        this.diretor = diretor;
     }
 
-    public String getResponsavel() {
-        return responsavel;
+    public String getDiretor() {
+        return diretor;
     }
 
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
+    public void setDiretor(String diretor) {
+        this.diretor = diretor;
     }
 
     public Turma getTurma() {
