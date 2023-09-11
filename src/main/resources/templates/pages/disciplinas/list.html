@@ -28,6 +28,7 @@
             <th>ID</th>
             <th>Nome da Disciplina</th>
             <th>Programa da Disciplina</th>
+            <th>Professores</th>
             <th>Ações</th>
           </tr>
           </thead>
@@ -36,6 +37,14 @@
             <td th:text="${disciplina.id}"></td>
             <td th:text="${disciplina.nomeDisciplina}"></td>
             <td th:text="${disciplina.programaDisciplina}"></td>
+              <td>
+                  <div th:each="professor:${professores}">
+                      <div>
+                          <input type="checkbox" th:value="${professor.id}" checked disabled>
+                          <lable th:text="${professor.nome}"></lable>
+                      </div>
+                  </div>
+              </td>
             <td>
 <!--              <a th:href="@{/turma/view/{id}(id=${turma.id})}"><button type="button">Ver</button></a>-->
               <a th:href="@{/disciplinas/edit/{id}(id=${disciplina.id})}"><button type="button">Editar</button></a>

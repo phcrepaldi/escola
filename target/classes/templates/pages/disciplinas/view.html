@@ -16,6 +16,7 @@
           <th>ID</th>
           <th>Nome da Disciplina</th>
           <th>Programa da Disciplina</th>
+          <th>Professores</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,14 @@
           <td th:text="${disciplina.id}"></td>
           <td th:text="${disciplina.nomeDisciplina}"></td>
           <td th:text="${disciplina.programaDisciplina}"></td>
+          <td>
+            <div th:each="professor:${professores}">
+              <div>
+                <input type="checkbox" th:value="${professor.id}" checked disabled>
+                <lable th:text="${professor.nome}"></lable>
+              </div>
+            </div>
+          </td>
         </tr>
         <tr>
           <td><a class="button" th:href="@{/}">Voltar ao Menu</a></td>

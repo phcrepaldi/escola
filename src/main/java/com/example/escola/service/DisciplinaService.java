@@ -47,4 +47,8 @@ public class DisciplinaService {
 
     public void deleteDisciplina(Long id){disciplinaRepository.deleteById(id);}
 
+    public List<Disciplina> getDisciplinasByNomeDisciplina(String keyword){
+        return disciplinaRepository.findByNomeDisciplinaContainingIgnoreCase(keyword);
+    }
+
 }

@@ -1,16 +1,14 @@
 package com.example.escola.controller;
 
 import com.example.escola.model.Disciplina;
+import com.example.escola.model.Professor;
 import com.example.escola.service.DisciplinaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -87,6 +85,16 @@ public class DisciplinaController {
         disciplinaService.deleteDisciplina(id);
 
         return "redirect:/disciplinas/list";
+    }
+
+    @GetMapping("disciplinas/search")
+    public String pesquisaDisciplinas(@RequestParam("keyword") String keyword, Model model){
+
+        List<Disciplina> disciplinas = disciplinaService.getDisciplinasByNomeDisciplina(keyword);
+        model.addAttribute("disciplinas", disciplinas);
+        model.addAttribute("keyword", keyword);
+
+        return "pages/disciplinas/list";
     }
 
 }

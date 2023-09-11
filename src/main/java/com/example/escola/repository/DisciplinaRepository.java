@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
     List<Disciplina> findByProfessores(Professor professor);
+
+    List<Disciplina> findByNomeDisciplinaContainingIgnoreCase(String keyword);
 }
