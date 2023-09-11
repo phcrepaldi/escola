@@ -112,7 +112,7 @@ public class ProfessorController {
         if(updateProfessor!=null){
             model.addAttribute("allDisciplinas",disciplinaService.getAllDisciplinas());
             model.addAttribute("generos", Genero.values());
-            model.addAttribute("sucesso", "Modelo atualizado com sucesso");
+            model.addAttribute("sucesso", "Professor atualizado com sucesso");
             return "pages/professores/edit";
         }
 

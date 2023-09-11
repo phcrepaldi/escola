@@ -3,6 +3,7 @@ package com.example.escola.controller;
 import com.example.escola.model.Disciplina;
 import com.example.escola.model.Professor;
 import com.example.escola.service.DisciplinaService;
+import com.example.escola.service.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,18 @@ import java.util.Optional;
 public class DisciplinaController {
 
     private final DisciplinaService disciplinaService;
+
+    private final ProfessorService professorService;
     @Autowired
-    public DisciplinaController(DisciplinaService disciplinaService){this.disciplinaService=disciplinaService;}
+    public DisciplinaController(DisciplinaService disciplinaService, ProfessorService professorService){
+        this.disciplinaService=disciplinaService;
+        this.professorService=professorService;
+    }
     @GetMapping("disciplinas/list")
     public String getAllDisciplinas(Model model){
         List<Disciplina> disciplinas = disciplinaService.getAllDisciplinas();
         model.addAttribute("disciplinas", disciplinas);
+        model.addAttribute("professores", professorService.getallProfessores());
 
         return "pages/disciplinas/list";
     }
@@ -32,6 +39,7 @@ public class DisciplinaController {
 
         if(disciplina.isPresent()){
             model.addAttribute("disciplina", disciplina.get());
+            model.addAttribute("professores", professorService.getProfessoresByDisciplina(disciplina.get()));
 
             return "pages/disciplinas/view";
         }
@@ -40,6 +48,7 @@ public class DisciplinaController {
     @GetMapping("/disciplinas/new")
     public String addDisciplina(Model model){
         model.addAttribute("disciplina", new Disciplina());
+        model.addAttribute("professores", professorService.getallProfessores());
 
         return "pages/disciplinas/new";
     }
@@ -47,6 +56,7 @@ public class DisciplinaController {
     public String saveDisciplina(@Valid @ModelAttribute("disciplina") Disciplina disciplina,
                                  BindingResult disciplinaResult, Model model){
         if(disciplinaResult.hasErrors()){
+            model.addAttribute("professores", professorService.getallProfessores());
             return "pages/disciplinas/new";
         }
 
@@ -59,25 +69,32 @@ public class DisciplinaController {
         Optional<Disciplina> disciplinaOptional=disciplinaService.getDisciplinaById(id);
         if(disciplinaOptional.isPresent()){
             model.addAttribute("disciplina", disciplinaOptional.get());
+            model.addAttribute("allProfessores", professorService.getallProfessores());
 
             return "pages/disciplinas/edit";
         }
         return "redirect:/disciplinas/list";
     }
     @PostMapping("disciplinas/edit/{id}")
-    public String updateDisciplina(@PathVariable("id") Long id, @Valid Disciplina disciplina,
+    public String updateDisciplina(@PathVariable("id") Long id, @Valid @ModelAttribute("disciplina")
+                                    Disciplina disciplina,
                                    BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("allProfessores", professorService.getallProfessores());
             return "pages/disciplinas/edit";
         }
+
         Disciplina updateDisciplina=disciplinaService.updateDisciplina(id, disciplina);
+
         if(updateDisciplina==null){
             model.addAttribute("erro", "Algo correu mal.");
             return "pages/disciplinas/edit";
         }else{
+            model.addAttribute("allProfessores",professorService.getallProfessores());
             model.addAttribute("sucesso", "Disciplina atualizada com sucesso.");
             return "pages/disciplinas/edit";
         }
+
     }
 
     @GetMapping("disciplinas/delete/{id}")

@@ -30,7 +30,8 @@ public class DisciplinaService {
         return disciplina;
     }
 
-    public List<Disciplina> getDisciplinasByProfessor(Professor professor){return disciplinaRepository.findByProfessores(professor);}
+    public List<Disciplina> getDisciplinasByProfessor(Professor professor){
+        return disciplinaRepository.findByProfessores(professor);}
 
     public Disciplina updateDisciplina(Long id, Disciplina disciplina){
         Optional<Disciplina> disciplinaOptional=getDisciplinaById(id);
@@ -39,6 +40,7 @@ public class DisciplinaService {
             Disciplina _disciplina=disciplinaOptional.get();
             _disciplina.setNomeDisciplina(disciplina.getNomeDisciplina());
             _disciplina.setProgramaDisciplina(disciplina.getProgramaDisciplina());
+            _disciplina.setProfessores(disciplina.getProfessores());
 
             return disciplinaRepository.save(_disciplina);
         }

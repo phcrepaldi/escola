@@ -1,5 +1,6 @@
 package com.example.escola.service;
 
+import com.example.escola.model.Disciplina;
 import com.example.escola.model.Professor;
 import com.example.escola.repository.ProfessorRepository;
 import jakarta.validation.Valid;
@@ -50,6 +51,9 @@ public class ProfessorService {
         }
         return null;
     }
+
+    public List<Professor> getProfessoresByDisciplina(Disciplina disciplina){
+        return professorRepository.findByDisciplinas(disciplina);}
 
     public List<Professor> getProfessoresByNome(String keyword){
         return professorRepository.findByNomeContainingIgnoreCase(keyword);
