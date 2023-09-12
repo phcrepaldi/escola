@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 
@@ -28,7 +30,7 @@
                                     Turmas
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/turma/new}"><button type="button">Inserir</button></a>
+                                    <a th:href="@{/turma/new}"><button type="button"><i class="material-icons md-8">settings</i> | Inserir</button></a>
                                     <a th:href="@{/turma/list}"><button type="button">Listar</button></a>
                                 </td>
                             </tr>

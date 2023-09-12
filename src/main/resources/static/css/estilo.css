@@ -98,3 +98,5 @@ td {
 .linha {
     border: solid 1px white;
 }
+
+.material-icons.md-8 { font-size: 8px; color: white; }
