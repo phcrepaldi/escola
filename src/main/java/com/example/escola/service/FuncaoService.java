@@ -39,6 +39,7 @@ public class FuncaoService {
         if(funcaoOptional.isPresent()){
             Funcao _funcao = funcaoOptional.get();
             _funcao.setFuncaonome(funcao.getFuncaonome());
+            _funcao.setFuncionarios(funcao.getFuncionarios());
 
             return funcaoRepository.save(_funcao);
         }

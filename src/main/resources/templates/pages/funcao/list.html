@@ -20,12 +20,27 @@
         <tr>
             <th>ID</th>
             <th>Função</th>
+            <th>Funcionários</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="funcao: ${funcao}" >
             <td class="center" th:text="${funcao.id}"></td>
             <td class="center" th:text="${funcao.funcaonome}"></td>
+<!--            <td>-->
+<!--                <div th:each="funcionario:${funcionario.funcao}">-->
+<!--                    <input type="checkbox" th:value="${funcionario.id}" checked disabled>-->
+<!--                    <label th:text="${funcionario.nomeFuncionario}"></label>-->
+<!--                </div>-->
+<!--            </td>-->
+            <td>
+                <div th:each="funcionario:${funcao.funcionarios}">
+                    <div>
+                        <input type="checkbox" th:value="${funcionario.id}" checked disabled>
+                        <lable th:text="${funcionario.nome}"></lable>
+                    </div>
+                </div>
+            </td>
             <td>
                 <a th:href="@{/funcao/view/{id}(id=${funcao.id})}"><button type="button">Ver</button></a>
                 <a th:href="@{/funcao/edit/{id}(id=${funcao.id})}"><button type="button">Editar</button></a>

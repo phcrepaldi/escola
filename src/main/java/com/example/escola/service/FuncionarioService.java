@@ -11,6 +11,7 @@ import com.example.escola.repository.FuncionarioRepository;
 import com.example.escola.model.Funcionario;
 import com.example.escola.model.Funcao;
 
+
 import java.util.List;
 import java.util.Optional;
 import com.example.escola.model.Funcionario;
@@ -71,5 +72,8 @@ public class FuncionarioService {
     public List<Funcionario> getFuncionarioByNome(String keyword){
         return funcionarioRepository.findByNomeContainingIgnoreCase(keyword);
     }
+
+    public List<Funcionario> getFuncionarioByFuncao(Funcao funcao){
+        return funcionarioRepository.findByFuncao(funcao);}
 
 }
