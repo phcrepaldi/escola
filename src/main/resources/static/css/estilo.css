@@ -58,6 +58,7 @@ button {
     font-size: 13px;
     font-weight: 600;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
 .interna {
@@ -99,4 +100,20 @@ td {
     border: solid 1px white;
 }
 
-.material-icons.md-8 { font-size: 8px; color: white; }
+.material-icons {
+    font-size: 18px;
+    color: #1e0036;
+}
+
+.icon{
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 17px;
+    background-size: contain;
+    float: left;
+    margin-left: -6px;
+    margin-right: 6px;
+    margin-top: -1px;
+
+}

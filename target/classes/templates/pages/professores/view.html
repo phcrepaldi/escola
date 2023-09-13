@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Ver Professor</title>
-  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
   <div class="principal">
     <div class="interna">
-      <h1>Dados do Professor(a)</h1>
+        <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
+
+        <h1>Dados do Professor(a)</h1>
       <table>
           <thead>
           <tr>

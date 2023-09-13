@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Inserir Professores</title>
+  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
   <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
@@ -10,7 +12,7 @@
   <div class="principal">
     <div class="interna">
 
-      <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+      <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
       <h1>Inserir Professores</h1>
         <div class="linha"></div>
         <br>
@@ -116,7 +118,7 @@
           <!-- botao -->
           <tr>
             <div>
-              <td><button type="submit">Submeter</button></td>
+              <td><button type="submit"><div class="icon"><i class="material-icons">send_outlined</i></div>Submeter</button></td>
               <!--<td><button type="button" onclick="window.location.href='/autor/list'">Listar</button></td>-->
             </div>
           </tr>

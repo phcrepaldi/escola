@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Listar Funcionários</title>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
             <h1>Lista de Funcionários</h1>
             <form th:action="@{/funcionario/search}" method="get">
                 <label>Pesquise por Funcionários:</label>
                 <input type="text" name="keyword">
-                <button type="submit">Pesquisar</button>
+                <button type="submit"><div class="icon"><i class="material-icons">search_outlined</i></div>Pesquisar</button>
                 <br>
                 <br>
                 <div class="linha"></div>
@@ -54,8 +56,8 @@
                         </td>
                         <td>
 <!--                            <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>-->
-                            <a th:href="@{/funcionario/edit/{id}(id=${func.id})}"><button type="button">Editar</button></a>
-                            <a th:href="@{/funcionario/delete/{id}(id=${func.id})}"><button type="button">Apagar</button></a>
+                            <a th:href="@{/funcionario/edit/{id}(id=${func.id})}"><button type="button"><div class="icon"><i class="material-icons">edit_outlined</i></div>Editar</button></a>
+                            <a th:href="@{/funcionario/delete/{id}(id=${func.id})}"><button type="button"><div class="icon"><i class="material-icons">delete_outlined</i></div>Apagar</button></a>
                         </td>
                     </tr>
 
@@ -69,7 +71,7 @@
                 <strong>Não existem registros a apresentar</strong>
             </div>
             <div>
-                <button type="button" onclick="window.location.href='/funcionario/new'">Inserir</button>
+                <button type="button" onclick="window.location.href='/funcionario/new'"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button>
             </div>
         </div>
     </div>

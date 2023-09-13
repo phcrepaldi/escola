@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Listar Turmas</title>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
             <h1>Lista de Turmas</h1>
 <div th:if="${!turma.isEmpty()}">
     <table>
@@ -26,9 +28,9 @@
             <td class="center" th:text="${turma.id}"></td>
             <td class="center" th:text="${turma.turmanome}"></td>
             <td>
-                <a th:href="@{/turma/view/{id}(id=${turma.id})}"><button type="button">Ver</button></a>
-                <a th:href="@{/turma/edit/{id}(id=${turma.id})}"><button type="button">Editar</button></a>
-                <a th:href="@{/turma/delete/{id}(id=${turma.id})}"><button type="button">Apagar</button></a>
+                <!--<a th:href="@{/turma/view/{id}(id=${turma.id})}"><button type="button">Ver</button></a>-->
+                <a th:href="@{/turma/edit/{id}(id=${turma.id})}"><button type="button"><div class="icon"><i class="material-icons">edit_outlined_outlined</i></div>Editar</button></a>
+                <a th:href="@{/turma/delete/{id}(id=${turma.id})}"><button type="button"><div class="icon"><i class="material-icons">delete_outlined_outlined</i></div>Apagar</button></a>
 
             </td>
         </tr>
@@ -43,7 +45,7 @@
     <strong>Não existem registros a apresentar</strong>
 </div>
 <div>
-    <button type="button" onclick="window.location.href='/turma/new'">Inserir</button>
+    <button type="button" onclick="window.location.href='/turma/new'"><div class="icon"><i class="material-icons">add_circle_outlined_outlined</i></div>Inserir</button>
 </div>
         </div>
     </div>

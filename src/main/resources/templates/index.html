@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Escola de Artes - Home</title>
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
 
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
@@ -27,11 +27,20 @@
                         <tbody>
                             <tr>
                                 <td class="center">
+                                    Funções
+                                </td>
+                                <td class="center">
+                                    <a th:href="@{/funcao/new}" ><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/funcao/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center">
                                     Turmas
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/turma/new}"><button type="button"><i class="material-icons md-8">settings</i> | Inserir</button></a>
-                                    <a th:href="@{/turma/list}"><button type="button">Listar</button></a>
+                                    <a th:href="@{/turma/new}"><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/turma/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
 
@@ -40,8 +49,8 @@
                                     Disciplinas
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/disciplinas/new}" ><button type="button">Inserir</button></a>
-                                    <a th:href="@{/disciplinas/list}"><button type="button">Listar</button></a>
+                                    <a th:href="@{/disciplinas/new}" ><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/disciplinas/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
                             <tr>
@@ -49,8 +58,8 @@
                                     Professores
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/professores/new}" ><button type="button">Inserir</button></a>
-                                    <a th:href="@{/professores/list}"><button type="button">Listar</button></a>
+                                    <a th:href="@{/professores/new}" ><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/professores/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
                             <tr>
@@ -58,26 +67,18 @@
                                     Funcionários
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/funcionario/new}" ><button type="button">Inserir</button></a>
-                                    <a th:href="@{/funcionario/list}"><button type="button">Listar</button></a>
+                                    <a th:href="@{/funcionario/new}" ><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/funcionario/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="center">
-                                    Funções
-                                </td>
-                                <td class="center">
-                                    <a th:href="@{/funcao/new}" ><button type="button">Inserir</button></a>
-                                    <a th:href="@{/funcao/list}"><button type="button">Listar</button></a>
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td class="center">
                                     Alunos
                                 </td>
                                 <td class="center">
-                                    <a th:href="@{/aluno/new}" ><button type="button">Inserir</button></a>
-                                    <a th:href="@{/aluno/list}"><button type="button">Listar</button></a>
+                                    <a th:href="@{/aluno/new}" ><button type="button"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button></a>
+                                    <a th:href="@{/aluno/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
 

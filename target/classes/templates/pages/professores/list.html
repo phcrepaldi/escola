@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Listar Professores</title>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
 
             <h1>Listar Professores</h1>
 
             <form th:action="@{/professores/search}" method="get">
                 <lable>Pesquise por Professor:</lable>
                 <input type="text" name="keyword" th:value="${keyword}">
-                <button type="submit">Pesquisar</button>
+                <button type="submit"><div class="icon"><i class="material-icons">search_outlined</i></div>Pesquisar</button>
                 <br>
                 <br>
                 <div class="linha"></div>
@@ -64,8 +66,8 @@
 <!--                    </td>-->
                     <td>
                         <!--                            <a th:href="@{/funcionario/view/{id}(id=${func.id})}"><button type="button">Ver</button></a>-->
-                        <a th:href="@{/professores/edit/{id}(id=${professor.id})}"><button type="button">Editar</button></a>
-                        <a th:href="@{/professores/delete/{id}(id=${professor.id})}"><button type="button">Apagar</button></a>
+                        <a th:href="@{/professores/edit/{id}(id=${professor.id})}"><button type="button"><div class="icon"><i class="material-icons">edit_outlined</i></div>Editar</button></a>
+                        <a th:href="@{/professores/delete/{id}(id=${professor.id})}"><button type="button"><div class="icon"><i class="material-icons">delete_outlined</i></div>Apagar</button></a>
                     </td>
                 </tr>
 <!--                <tr>-->
@@ -77,6 +79,9 @@
             <div class="linha"></div>
             <br>
             <div th:unless="${!professores.isEmpty()}"><strong>Não existem registos a apresentar.</strong></div>
+            <div>
+                <button type="button" onclick="window.location.href='/professores/new'"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button>
+            </div>
         </div>
     </div>
 </div>

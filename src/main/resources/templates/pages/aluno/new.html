@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Inserir Alunos</title>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
     <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
     <div class="principal">
         <div class="interna">
-            <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+            <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
 
             <h1>Inserir Alunos</h1>
             <div class="linha"></div>
@@ -132,7 +134,7 @@
                     <!-- botao -->
                     <tr>
                         <div>
-                            <td><button type="submit">Submeter</button></td>
+                            <td><button type="submit"><div class="icon"><i class="material-icons">send_outlined</i></div>Submeter</button></td>
 <!--                            <td><button type="button" onclick="window.location.href='/aluno/list'">Listar</button> </td>-->
                         </div>
                     </tr>

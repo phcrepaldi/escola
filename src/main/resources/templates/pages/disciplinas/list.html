@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Listar Disciplinas</title>
-  <link rel="stylesheet" th:href="@{/css/estilo.css}">
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}">
+
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div class="anterior">
   <div class="principal">
     <div class="interna">
-      <a th:href="@{/}"><button type="button">< Menu Principal</button></a>
+        <a th:href="@{/}"><button type="button"><div class="icon"><i class="material-icons">first_page_outlined</i></div>Menu Principal</button></a>
       <h1>Listar Disciplinas</h1>
 
       <form th:action="@{/disciplinas/search}" method="get">
         <lable>Pesquise por Disciplina:</lable>
         <input type="text" name="keyword" th:value="${keyword}">
-        <button type="submit">Pesquisar</button>
+        <button type="submit"><div class="icon"><i class="material-icons">search_outlined</i></div>Pesquisar</button>
         <br>
         <br>
         <div class="linha"></div>
@@ -27,7 +29,7 @@
           <tr>
             <th>ID</th>
             <th>Disciplina</th>
-            <th>Programa da Disciplina</th>
+            <th>Programa</th>
             <th>Professores</th>
             <th>Ações</th>
           </tr>
@@ -47,8 +49,8 @@
               </td>
             <td>
 <!--              <a th:href="@{/turma/view/{id}(id=${turma.id})}"><button type="button">Ver</button></a>-->
-              <a th:href="@{/disciplinas/edit/{id}(id=${disciplina.id})}"><button type="button">Editar</button></a>
-              <a th:href="@{/disciplinas/delete/{id}(id=${disciplina.id})}"><button type="button">Apagar</button></a>
+              <a th:href="@{/disciplinas/edit/{id}(id=${disciplina.id})}"><button type="button"><div class="icon"><i class="material-icons">edit_outlined</i></div>Editar</button></a>
+              <a th:href="@{/disciplinas/delete/{id}(id=${disciplina.id})}"><button type="button"><div class="icon"><i class="material-icons">delete_outlined</i></div>Apagar</button></a>
 
 
 <!--              <a class="button" th:href="@{/disciplinas/edit/{id}(id=${disciplina.id})}">Editar</a>-->
@@ -64,6 +66,9 @@
       <div class="linha"></div>
       <br>
       <div th:unless="${!disciplinas.isEmpty()}"><strong>Não existem registos a apresentar.</strong></div>
+        <div>
+            <button type="button" onclick="window.location.href='/disciplinas/new'"><div class="icon"><i class="material-icons">add_circle_outlined</i></div>Inserir</button>
+        </div>
     </div>
   </div>
 </div>
