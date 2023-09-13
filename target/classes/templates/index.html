@@ -17,12 +17,14 @@
                 <div class="linha"></div>
                 <br>
                 <div>
-                    <table>
+                    <table class="up">
                         <thead>
+
                             <tr>
-                                <th>Opções</th>
-                                <th>Operações</th>
+                                <th  class="op">Opções</th>
+                                <th  class="op">Operações</th>
                             </tr>
+
                         </thead>
                         <tbody>
                             <tr>
@@ -53,6 +55,11 @@
                                     <a th:href="@{/disciplinas/list}"><button type="button"><div class="icon"><i class="material-icons">list_alt</i></div>Listar</button></a>
                                 </td>
                             </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="down">
+                        <tbody>
                             <tr>
                                 <td class="center">
                                     Professores
@@ -82,7 +89,7 @@
                                 </td>
                             </tr>
 
-                        </tbody>
+                    </tbody>
                     </table>
                 </div>
 
