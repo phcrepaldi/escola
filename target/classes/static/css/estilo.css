@@ -146,3 +146,20 @@ td {
     padding-top: 5px;
 
 }
+
+.button:hover{
+    background-color: #4f4f74;
+}
+
+.button:active{
+    background-color: #3f3f63;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1a233d;
+    color: white;
+    text-align: center;
+}
