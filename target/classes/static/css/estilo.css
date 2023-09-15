@@ -152,15 +152,14 @@ td {
 button:hover{
     background-color: #4f4f74;
     color: white;
+        border: solid 1px #4f4f74;
+
 }
 
 button:hover .material-icons {
     color: white;
 }
 
-button:active{
-    background-color: #3f3f63;
-}
 
 .footer{
     position: fixed;
