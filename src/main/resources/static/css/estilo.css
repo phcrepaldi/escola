@@ -107,6 +107,8 @@ td {
     color: #1e0036;
 }
 
+
+
 .icon{
     content: "";
     display: inline-block;
@@ -147,11 +149,16 @@ td {
 
 }
 
-.button:hover{
+button:hover{
     background-color: #4f4f74;
+    color: white;
 }
 
-.button:active{
+button:hover .material-icons {
+    color: white;
+}
+
+button:active{
     background-color: #3f3f63;
 }
 
