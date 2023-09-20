@@ -44,16 +44,16 @@
                 </thead>
                 <tbody>
                 <tr th:each="professor: ${professores}">
-                    <td th:text="${professor.id}"></td>
-                    <td th:text="${professor.nome}"></td>
-                    <td th:text="${professor.apelido}"></td>
-                    <td th:text="${professor.datanas}"></td>
-                    <td th:text="${professor.genero}"></td>
-                    <td th:text="${professor.email}"></td>
-                    <td th:text="${professor.nif}"></td>
-                    <td th:text="${professor.telefone}"></td>
-                    <td th:text="${professor.morada}"></td>
-                    <td th:text="${professor.salario}"></td>
+                    <td class="center" th:text="${professor.id}"></td>
+                    <td class="center" th:text="${professor.nome}"></td>
+                    <td class="center" th:text="${professor.apelido}"></td>
+                    <td class="center" th:text="${#dates.format(professor.datanas, 'dd-MM-yyyy')}"></td>
+                    <td class="center" th:text="${professor.genero}"></td>
+                    <td class="center" th:text="${professor.email}"></td>
+                    <td class="center" th:text="${professor.nif}"></td>
+                    <td class="center" th:text="${professor.telefone}"></td>
+                    <td class="center" th:text="${professor.morada}"></td>
+                    <td class="center" th:text="${professor.salario}"></td>
                     <td>
                         <div th:each="disciplina:${professor.disciplinas}">
                             <input type="checkbox" th:value="${disciplina.id}" checked disabled>
