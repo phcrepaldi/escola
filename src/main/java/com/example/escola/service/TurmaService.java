@@ -1,9 +1,7 @@
 package com.example.escola.service;
 
-import com.example.escola.model.Funcao;
-import com.example.escola.model.Funcionario;
-import com.example.escola.model.Turma;
-import com.example.escola.model.Aluno;
+import com.example.escola.model.*;
+import com.example.escola.repository.AlunoRepository;
 import com.example.escola.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +13,11 @@ import java.util.Optional;
 
 public class TurmaService {
     private final TurmaRepository turmaRepository;
+    private final AlunoRepository alunoRepository;
     @Autowired
-    public TurmaService(TurmaRepository turmaRepository) {
+    public TurmaService(TurmaRepository turmaRepository, AlunoRepository alunoRepository) {
         this.turmaRepository = turmaRepository;
+        this.alunoRepository = alunoRepository;
     }
 
     public List<Turma> getAllTurma(){
@@ -31,8 +31,22 @@ public class TurmaService {
         Optional<Turma> turma = turmaRepository.findById(id);
         return turma;
     }
-    public void deleteTurma(Long id){
-        turmaRepository.deleteById(id);
+
+    public void deleteTurma(Long id) {
+        Optional<Turma> turmaOptional = turmaRepository.findById(id);
+
+        if (turmaOptional.isPresent()) {
+            Turma turma = turmaOptional.get();
+
+            List<Aluno> alunos = turma.getAlunos();
+            if (alunos != null && !alunos.isEmpty()) {
+                for (Aluno aluno : alunos) {
+                    aluno.setTurma(null);
+                    alunoRepository.save(aluno);
+                }
+            }
+            turmaRepository.delete(turma);
+        }
     }
 
     public Turma updateTurma(Long id, Turma turma){

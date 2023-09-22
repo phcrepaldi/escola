@@ -23,7 +23,7 @@ public class Aluno extends Pessoa{
     private String diretor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "turma_id", nullable = false)
+    @JoinColumn(name = "turma_id", nullable = true)
     private Turma turma;
 
     @ManyToMany(fetch = FetchType.LAZY)

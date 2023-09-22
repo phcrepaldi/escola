@@ -1,5 +1,6 @@
 package com.example.escola.service;
 
+import com.example.escola.model.Aluno;
 import com.example.escola.model.Disciplina;
 import com.example.escola.model.Professor;
 import com.example.escola.repository.DisciplinaRepository;
@@ -47,7 +48,29 @@ public class DisciplinaService {
         return null;
     }
 
-    public void deleteDisciplina(Long id){disciplinaRepository.deleteById(id);}
+    public void deleteDisciplina(Long id){
+        Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(id);
+
+        if (disciplinaOptional.isPresent()) {
+            Disciplina disciplina = disciplinaOptional.get();
+
+            List<Professor> professores = disciplina.getProfessores();
+            if (professores != null && !professores.isEmpty()) {
+                for (Professor professor : professores) {
+                    professor.getDisciplinas().remove(disciplina);
+                }
+            }
+
+            List<Aluno> alunos = disciplina.getAlunos();
+            if (alunos != null && !alunos.isEmpty()) {
+                for (Aluno aluno : alunos) {
+                    aluno.getDisciplinas().remove(disciplina);
+                }
+            }
+
+            disciplinaRepository.delete(disciplina);
+        }
+    }
 
     public List<Disciplina> getDisciplinasByNomeDisciplina(String keyword){
         return disciplinaRepository.findByNomeDisciplinaContainingIgnoreCase(keyword);

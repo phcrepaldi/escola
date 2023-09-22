@@ -18,7 +18,7 @@ public class Funcao extends BaseEntity{
     @Length(min = 1, max = 128, message = "O tamanho tem que ser entre 1 e 128 caracteres")
     private String funcaonome;
 
-    @OneToMany(mappedBy = "funcao", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "funcao")
     private List<Funcionario> funcionarios = new ArrayList<>();
 
     public Funcao() {}

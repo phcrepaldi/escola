@@ -50,6 +50,7 @@ p {
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
+    margin: 6px;
 }
 
 button {
@@ -170,4 +171,5 @@ button:hover .material-icons {
     background-color: #1a233d;
     color: white;
     text-align: center;
+    height: 30px;
 }

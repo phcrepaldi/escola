@@ -24,7 +24,7 @@ public class Funcionario extends Pessoa{
     private Double salario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "funcao_id", nullable = false)
+    @JoinColumn(name = "funcao_id", nullable = true)
     private Funcao funcao;
 
 

@@ -1,8 +1,9 @@
 package com.example.escola.service;
 
-import com.example.escola.model.Funcao;
-import com.example.escola.model.Funcionario;
+import com.example.escola.model.*;
 import com.example.escola.repository.FuncaoRepository;
+import com.example.escola.repository.FuncionarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class FuncaoService {
     private final FuncaoRepository funcaoRepository;
-    @Autowired
-    public FuncaoService(FuncaoRepository funcaoRepository) {
-        this.funcaoRepository = funcaoRepository;
-    }
+    private final FuncionarioRepository funcionarioRepository;
 
+    public FuncaoService(FuncaoRepository funcaoRepository, FuncionarioRepository funcionarioRepository) {
+        this.funcaoRepository = funcaoRepository;
+        this.funcionarioRepository = funcionarioRepository;
+    }
     public List<Funcao> getAllFuncao(){
         return funcaoRepository.findAll();
     }
@@ -29,8 +31,23 @@ public class FuncaoService {
         Optional<Funcao> funcao = funcaoRepository.findById(id);
         return funcao;
     }
-    public void deleteFuncao(Long id){
-        funcaoRepository.deleteById(id);
+
+
+    @Transactional
+    public void deleteFuncao(Long id) {
+        Optional<Funcao> funcaoOptional = funcaoRepository.findById(id);
+
+        if (funcaoOptional.isPresent()) {
+            Funcao funcao = funcaoOptional.get();
+
+            List<Funcionario> funcionarios = funcao.getFuncionarios();
+            for (Funcionario funcionario : funcionarios) {
+                funcionario.setFuncao(null);
+                funcionarioRepository.save(funcionario);
+            }
+
+            funcaoRepository.delete(funcao);
+        }
     }
 
     public Funcao updateFuncao(Long id, Funcao funcao){

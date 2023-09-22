@@ -16,7 +16,7 @@ public class Turma extends BaseEntity{
     @Length(min = 1, max = 128, message = "O tamanho tem que ser entre 1 e 128 caracteres")
     private String turmanome;
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 
     public Turma() {}
