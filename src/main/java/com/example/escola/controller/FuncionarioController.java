@@ -84,53 +84,43 @@ public class FuncionarioController {
     }
 
     @PostMapping("/funcionario/save")
-    //   public String saveFuncionario(@Valid Funcionario funcionario){
     public String saveFuncionario(@Valid @ModelAttribute("funcionario") Funcionario funcionario,
-                            BindingResult funcionarioResult,
-                            Model model,
-                            @RequestParam("datanas") String datanasString){
-        if (funcionarioResult.hasErrors()){
-            model.addAttribute("generos", Genero.values());
-            model.addAttribute("funcoes", funcaoService.getAllFuncao());
-            return "pages/funcionario/new";
-        }
+                                  BindingResult funcionarioResult,
+                                  Model model,
+                                  @RequestParam("datanas") String datanasString,
+                                  @RequestParam(value = "funcaoId", required = false) Long funcaoId) {
 
-        if (funcionario.getFuncao().getFuncaonome() == null || funcionario.getFuncao().getFuncaonome().isEmpty()) {
-            funcionarioResult.rejectValue("funcao.funcaonome", "field.required", "A função é obrigatória.");
+        if (funcionarioResult.hasErrors()) {
             model.addAttribute("generos", Genero.values());
-            return "pages/funcionario/new";
-        }
+            model.addAttribute("turmas", funcaoService.getAllFuncao());
 
-        Long funcaoId = funcionario.getFuncao().getId();
-        if (funcaoId == null) {
-            funcionarioResult.rejectValue("funcao.id", "field.required", "A função é obrigatória.");
-            model.addAttribute("generos", Genero.values());
             return "pages/funcionario/new";
         }
 
         Date dataNascimento = stringToDate(datanasString);
         funcionario.setDatanas(dataNascimento);
 
-
-        Funcao funcao = funcaoRepository.findById(funcaoId).orElse(null);
-        if (funcao != null) {
-            funcionario.setFuncao(funcao);
-            Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
+        if (funcaoId != null) {
+            Funcao funcao = funcaoRepository.findById(funcaoId).orElse(null);
+            if (funcao != null) {
+                funcionario.setFuncao(funcao);
+            }
         }
 
+        if (funcionarioService.nifExists(funcionario.getNif())) {
+            funcionarioResult.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/new";
+        }
 
-//        Funcao funcao = funcionario.getFuncao();
-//        Funcao savedFuncao = funcaoService.saveFuncao(funcao);
-//
-//        funcionario.setFuncao(savedFuncao);
-
-//        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
-//        funcionario.setFuncao(savedFuncao);
-
-//        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
+        Funcionario _funcionario = funcionarioService.saveFuncionario(funcionario);
 
         return "redirect:/funcionario/new";
     }
+
+
+
+
 
 
 
@@ -149,12 +139,18 @@ public class FuncionarioController {
     }
     @PostMapping("/funcionario/{id}/edit")
     public String updateFuncionario(@PathVariable("id") Long id, @Valid @ModelAttribute("funcionario") Funcionario funcionario,
-                              BindingResult result, Model model){
+                                    BindingResult result, Model model){
         if (result.hasErrors()){
             model.addAttribute("generos", Genero.values());
             model.addAttribute("funcoes", funcaoService.getAllFuncao());
 
             return "pages/funcionario/edit";
+        }
+
+        if (funcionarioService.nifExistsExceptCurrent(id, funcionario.getNif())) {
+            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+            model.addAttribute("generos", Genero.values());
+            return "pages/funcionario/new";
         }
 
         Funcionario updatedFuncionario = funcionarioService.updateFuncionario(id,funcionario);

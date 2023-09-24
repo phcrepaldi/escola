@@ -10,4 +10,9 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     List<Professor> findByNomeContainingIgnoreCase(String keyword);
 
     List<Professor> findByDisciplinas(Disciplina disciplina);
+
+    boolean existsByNif(String nif);
+    boolean existsByNifAndIdNot(String nif, Long id);
+
+
 }

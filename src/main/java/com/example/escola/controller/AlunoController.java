@@ -89,56 +89,50 @@ public class AlunoController {
     }
 
     @PostMapping("/aluno/save")
-    //   public String saveAluno(@Valid Aluno aluno){
     public String saveAluno(@Valid @ModelAttribute("aluno") Aluno aluno,
                             BindingResult alunoResult,
                             Model model,
-                            @RequestParam("datanas") String datanasString){
-        if (alunoResult.hasErrors()){
+                            @RequestParam("datanas") String datanasString) {
+
+        if (alunoResult.hasErrors()) {
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
             model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-
             return "pages/aluno/new";
         }
 
-        if (aluno.getTurma().getTurmanome() == null || aluno.getTurma().getTurmanome().isEmpty()) {
+        Turma turmaDoAluno = aluno.getTurma();
+        if (turmaDoAluno == null) {
+            aluno.setTurma(null); // Certifique-se de que a turma seja nula se não estiver definida
+        } else if (turmaDoAluno.getTurmanome() == null || turmaDoAluno.getTurmanome().isEmpty()) {
             alunoResult.rejectValue("turma.turmanome", "field.required", "A turma é obrigatória.");
             model.addAttribute("generos", Genero.values());
             model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-
             return "pages/aluno/new";
         }
 
-        Long turmaId = aluno.getTurma().getId();
-        if (turmaId == null) {
-            alunoResult.rejectValue("turma.id", "field.required", "A turma é obrigatória.");
-            model.addAttribute("generos", Genero.values());
-            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-
-            return "pages/aluno/new";
-        }
-
+        Long turmaId = turmaDoAluno != null ? turmaDoAluno.getId() : null;
         Date dataNascimento = stringToDate(datanasString);
         aluno.setDatanas(dataNascimento);
 
-
-        Turma turma = turmaRepository.findById(turmaId).orElse(null);
-        if (turma != null) {
-            aluno.setTurma(turma);
-            Aluno _aluno = alunoService.saveAluno(aluno);
+        if (turmaId != null) {
+            Turma turma = turmaRepository.findById(turmaId).orElse(null);
+            if (turma != null) {
+                aluno.setTurma(turma);
+            }
+        } else {
+            aluno.setTurma(null); // Defina a turma como nula se não houver turma selecionada
         }
 
+        if (alunoService.nifExists(aluno.getNif())) {
+            alunoResult.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+            model.addAttribute("generos", Genero.values());
+            model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            return "pages/aluno/new";
+        }
 
-//        Turma turma = aluno.getTurma();
-//        Turma savedTurma = turmaService.saveTurma(turma);
-//
-//        aluno.setTurma(savedTurma);
-
-//        Aluno _aluno = alunoService.saveAluno(aluno);
-//        aluno.setTurma(savedTurma);
-
-//        Aluno _aluno = alunoService.saveAluno(aluno);
+        Aluno _aluno = alunoService.saveAluno(aluno);
 
         return "redirect:/aluno/new";
     }
@@ -160,6 +154,8 @@ public class AlunoController {
         }
         return "redirect:/aluno/list";
     }
+
+
     @PostMapping("/aluno/{id}/edit")
     public String updateAluno(@PathVariable("id") Long id, @Valid @ModelAttribute("aluno") Aluno aluno,
                               BindingResult result, Model model){
@@ -170,6 +166,14 @@ public class AlunoController {
 
 
             return "pages/aluno/edit";
+        }
+
+        if (alunoService.nifExistsExceptCurrent(id, aluno.getNif())) {
+            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+            model.addAttribute("generos", Genero.values());
+            model.addAttribute("turmas", turmaService.getAllTurma());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            return "pages/aluno/new";
         }
 
         Aluno updatedAluno = alunoService.updateAluno(id,aluno);

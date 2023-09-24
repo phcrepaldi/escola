@@ -49,6 +49,22 @@ public class TurmaService {
         }
     }
 
+    public boolean turmaExists(String turmanome) {
+        return turmaRepository.existsByTurmanome(turmanome);
+    }
+
+    public boolean turmaExistsExceptCurrent(Long id, String turmanome) {
+        Turma existingTurma = turmaRepository.findByTurmanome(turmanome);
+
+        if (existingTurma != null && !existingTurma.getId().equals(id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
     public Turma updateTurma(Long id, Turma turma){
         Optional<Turma> turmaOptional = getTurmaById(id);
 

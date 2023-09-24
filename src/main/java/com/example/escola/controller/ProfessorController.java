@@ -66,7 +66,15 @@ public class ProfessorController {
     @PostMapping("/professores/save")
     public String saveProfessor(@Valid @ModelAttribute("professor") Professor professor,
                                 BindingResult result, Model model){
+
         if(result.hasErrors()){
+            model.addAttribute("generos", Genero.values());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            return "pages/professores/new";
+        }
+
+        if (professorService.nifExists(professor.getNif())) {
+            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
             model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/new";
@@ -107,6 +115,15 @@ public class ProfessorController {
             model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/edit";
         }
+
+        if (professorService.nifExistsExceptCurrent(id, professor.getNif())) {
+            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+            model.addAttribute("generos", Genero.values());
+            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
+            return "pages/professores/new";
+
+        }
+
         Professor updateProfessor=professorService.updateProfessor(id, professor);
 
         if(updateProfessor!=null){

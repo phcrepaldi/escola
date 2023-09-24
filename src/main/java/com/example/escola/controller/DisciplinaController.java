@@ -59,7 +59,11 @@ public class DisciplinaController {
             model.addAttribute("professores", professorService.getallProfessores());
             return "pages/disciplinas/new";
         }
-
+        // Verifica se a turma já existe
+        if (disciplinaService.disciplinaExists(disciplina.getNomeDisciplina())) {
+            disciplinaResult.rejectValue("nomeDisciplina", "disciplina.duplicate", "Disciplina já existe no banco de dados.");
+            return "pages/disciplinas/new";
+        }
         Disciplina _disciplina=disciplinaService.saveDisciplina(disciplina);
 
         return "redirect:/disciplinas/new";
@@ -81,6 +85,11 @@ public class DisciplinaController {
                                    BindingResult result, Model model){
         if(result.hasErrors()){
             model.addAttribute("allProfessores", professorService.getallProfessores());
+            return "pages/disciplinas/edit";
+        }
+
+        if (disciplinaService.disciplinaExistsExceptCurrent(id, disciplina.getNomeDisciplina())) {
+            result.rejectValue("nomeDisciplina", "disciplina.duplicate", "Disciplina já existe no banco de dados.");
             return "pages/disciplinas/edit";
         }
 

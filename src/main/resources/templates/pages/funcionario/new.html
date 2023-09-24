@@ -112,14 +112,16 @@
                             <td><label for="funcaonome">Função</label></td>
                             <td>
                                 <select id="funcaonome" name="funcaonome" th:field="*{funcao}">
+                                    <option th:value="null">Sem função</option>
+
                                     <option th:each="f : ${funcoes}" th:value="${f.id}" th:text="${f.funcaonome}"></option>
                                 </select>
 
                                 <span th:if="${#fields.hasErrors('funcao.funcaonome')}" th:errors="*{funcao.funcaonome}"></span>
                             </td>
                         </div>
-
                     </tr>
+
 
                     <!-- botao -->
                     <tr>

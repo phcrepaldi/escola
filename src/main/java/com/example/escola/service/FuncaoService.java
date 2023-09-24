@@ -62,7 +62,19 @@ public class FuncaoService {
         }
         return null;
     }
+    public boolean funcaoExists(String funcaonome) {
+        return funcaoRepository.existsByFuncaonome(funcaonome);
+    }
 
+    public boolean funcaoExistsExceptCurrent(Long id, String funcaonome) {
+        Funcao existingFuncao = funcaoRepository.findByFuncaonome(funcaonome);
+
+        if (existingFuncao != null && !existingFuncao.getId().equals(id)) {
+            return true;
+        }
+
+        return false;
+    }
     public List<Funcao> getFuncoesByFuncionario(Funcionario funcionario){
         return funcaoRepository.findByFuncionarios(funcionario);
     }

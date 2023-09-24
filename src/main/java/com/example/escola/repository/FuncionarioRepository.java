@@ -10,4 +10,8 @@ import java.util.List;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
     List<Funcionario> findByNomeContainingIgnoreCase(String keyword);
     List<Funcionario> findByFuncao(Funcao funcao);
+    boolean existsByNif(String nif);
+    boolean existsByNifAndIdNot(String nif, Long id);
+
+
 }

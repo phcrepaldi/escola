@@ -12,6 +12,7 @@ public interface FuncaoRepository extends JpaRepository<Funcao, Long> {
     List<Funcao> findByFuncionarios(Funcionario funcionario);
     Funcao findByFuncaonome(String funcaonome);
 
+    boolean existsByFuncaonome(String funcaonome);
 
 }
 

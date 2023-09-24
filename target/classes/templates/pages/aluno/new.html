@@ -112,6 +112,7 @@
                             <td><label for="turmanome">Turma</label></td>
                             <td>
                                 <select id="turmanome" name="turmanome" th:field="*{turma}">
+                                    <option th:value="null">Sem turma</option>
                                     <option th:each="t : ${turmas}" th:value="${t.id}" th:text="${t.turmanome}"></option>
                                 </select>
 

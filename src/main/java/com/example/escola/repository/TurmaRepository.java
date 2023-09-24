@@ -13,6 +13,8 @@ import java.util.List;
 public interface TurmaRepository extends JpaRepository<Turma, Long> {
     List<Turma> findByAlunos(Aluno aluno);
     Turma findByTurmanome(String turmanome);
+    boolean existsByTurmanome(String turmanome);
+
 
 }
 

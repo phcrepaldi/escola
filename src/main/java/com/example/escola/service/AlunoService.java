@@ -49,7 +49,12 @@ public class AlunoService {
         return null;
     }
 
-
+    public boolean nifExistsExceptCurrent(Long id, String nif) {
+        return alunoRepository.existsByNifAndIdNot(nif, id);
+    }
+    public boolean nifExists(String nif) {
+        return alunoRepository.existsByNif(nif);
+    }
     public Aluno saveAluno(@Valid Aluno aluno){
         return alunoRepository.save(aluno);
     }

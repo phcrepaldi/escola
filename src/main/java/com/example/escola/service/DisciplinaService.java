@@ -3,6 +3,7 @@ package com.example.escola.service;
 import com.example.escola.model.Aluno;
 import com.example.escola.model.Disciplina;
 import com.example.escola.model.Professor;
+import com.example.escola.model.Turma;
 import com.example.escola.repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,21 @@ public class DisciplinaService {
 
             disciplinaRepository.delete(disciplina);
         }
+    }
+    public boolean disciplinaExists(String nomeDisciplina) {
+        return disciplinaRepository.existsByNomeDisciplina(nomeDisciplina);
+    }
+
+    public boolean disciplinaExistsExceptCurrent(Long id, String nomeDisciplina) {
+        List<Disciplina> existingDisciplinas = disciplinaRepository.findByNomeDisciplinaContainingIgnoreCase(nomeDisciplina);
+
+        for (Disciplina existingDisciplina : existingDisciplinas) {
+            if (!existingDisciplina.getId().equals(id)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public List<Disciplina> getDisciplinasByNomeDisciplina(String keyword){

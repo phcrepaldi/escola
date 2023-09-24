@@ -2,6 +2,7 @@ package com.example.escola.service;
 
 import com.example.escola.model.Disciplina;
 import com.example.escola.model.Professor;
+import com.example.escola.model.Turma;
 import com.example.escola.repository.ProfessorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,15 @@ public class ProfessorService {
         return null;
     }
 
+
+    public boolean nifExistsExceptCurrent(Long id, String nif) {
+        return professorRepository.existsByNifAndIdNot(nif, id);
+    }
+
+
+    public boolean nifExists(String nif) {
+        return professorRepository.existsByNif(nif);
+    }
     public List<Professor> getProfessoresByDisciplina(Disciplina disciplina){
         return professorRepository.findByDisciplinas(disciplina);}
 

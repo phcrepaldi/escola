@@ -54,6 +54,13 @@ public class TurmaController {
         if (result.hasErrors()){
             return "pages/turma/new";
         }
+
+        // Verifica se a turma já existe
+        if (turmaService.turmaExists(turma.getTurmanome())) {
+            result.rejectValue("turmanome", "turma.duplicate", "Turma já existe no banco de dados.");
+            return "pages/turma/new";
+        }
+
         turmaService.saveTurma(turma);
         return "redirect:/turma/new";
     }
@@ -75,31 +82,28 @@ public class TurmaController {
         return "redirect:/turma/list";
     }
     @PostMapping("/turma/{id}/edit")
-    public String updateFuncionario(@PathVariable("id") Long id, @Valid Turma turma, BindingResult result, Model model){
+    public String updateTurma(@PathVariable("id") Long id, @Valid Turma turma, BindingResult result, Model model) {
 
-        Turma updatedTurma = turmaService.updateTurma(id, turma);
-//        if (updatedTurma== null){
-//            return "pages/turma/edit";
-//        }
-//        return "redirect:/turma/list";
-
-
-        if(result.hasErrors()){
+        if (turmaService.turmaExistsExceptCurrent(id, turma.getTurmanome())) {
+            result.rejectValue("turmanome", "turma.duplicate", "Turma já existe no banco de dados.");
             return "pages/turma/edit";
         }
-        Turma updateDisciplina=turmaService.updateTurma(id, turma);
-        if(updatedTurma==null){
+
+        if (result.hasErrors()) {
+            return "pages/turma/edit";
+        }
+
+        Turma updatedTurma = turmaService.updateTurma(id, turma);
+
+        if (updatedTurma == null) {
             model.addAttribute("erro", "Algo correu mal.");
             return "pages/turma/edit";
-        }else{
+        } else {
             model.addAttribute("sucesso", "Turma atualizada com sucesso.");
             return "pages/turma/edit";
         }
-
-
-
-
     }
+
 
 
 

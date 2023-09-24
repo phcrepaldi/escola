@@ -63,6 +63,11 @@ public class FuncaoController {
             model.addAttribute("funcionario", funcionarioService.getAllFuncionario());
             return "pages/funcao/new";
         }
+        // Verifica se a turma já existe
+        if (funcaoService.funcaoExists(funcao.getFuncaonome())) {
+            result.rejectValue("funcaonome", "funcao.duplicate", "Função já existe no banco de dados.");
+            return "pages/funcao/new";
+        }
         funcaoService.saveFuncao(funcao);
         return "redirect:/funcao/new";
     }
@@ -95,7 +100,15 @@ public class FuncaoController {
 //    }
 
 
+
         Optional<Funcao> existingFuncao = funcaoService.getFuncaoById(id);
+
+        if (funcaoService.funcaoExistsExceptCurrent(id, funcao.getFuncaonome())) {
+            result.rejectValue("funcaonome", "funcao.duplicate", "Função já existe no banco de dados.");
+            return "pages/funcao/edit";
+        }
+
+
         if (existingFuncao.isPresent()) {
             Funcao updatedFuncao = existingFuncao.get();
 

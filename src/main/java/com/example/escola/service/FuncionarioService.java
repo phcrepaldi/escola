@@ -50,6 +50,13 @@ public class FuncionarioService {
         return null;
     }
 
+    public boolean nifExists(String nif) {
+        return funcionarioRepository.existsByNif(nif);
+    }
+
+    public boolean nifExistsExceptCurrent(Long id, String nif) {
+        return funcionarioRepository.existsByNifAndIdNot(nif, id);
+    }
 
     public Funcionario saveFuncionario(@Valid Funcionario funcionario){
         return funcionarioRepository.save(funcionario);

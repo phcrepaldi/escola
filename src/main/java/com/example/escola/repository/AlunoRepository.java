@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     List<Aluno> findByNomeContainingIgnoreCase(String keyword);
+    boolean existsByNif(String nif);
+    boolean existsByNifAndIdNot(String nif, Long id);
+
+
 }
