@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import com.example.escola.service.PessoaService;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +22,15 @@ public class ProfessorController {
     private final ProfessorService professorService;
 
     private final DisciplinaService disciplinaService;
+
+    private final PessoaService pessoaService;
+
+
     @Autowired
-    public ProfessorController(ProfessorService professorService, DisciplinaService disciplinaService){
+    public ProfessorController(ProfessorService professorService, DisciplinaService disciplinaService, PessoaService pessoaService){
         this.professorService=professorService;
         this.disciplinaService=disciplinaService;
+        this.pessoaService = pessoaService;
     }
 
 //    @GetMapping("/index")
@@ -73,12 +80,13 @@ public class ProfessorController {
             return "pages/professores/new";
         }
 
-        if (professorService.nifExists(professor.getNif())) {
+        if (pessoaService.nifExistsInAnyPerson(professor.getNif())) {
             result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
             model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
             return "pages/professores/new";
         }
+
 
         professorService.saveProfessor(professor);
 
@@ -116,13 +124,13 @@ public class ProfessorController {
             return "pages/professores/edit";
         }
 
-        if (professorService.nifExistsExceptCurrent(id, professor.getNif())) {
+        if (pessoaService.nifExistsInAnyPerson(professor.getNif())) {
             result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
-            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-            return "pages/professores/new";
-
+            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
+            return "pages/professores/edit";
         }
+
 
         Professor updateProfessor=professorService.updateProfessor(id, professor);
 

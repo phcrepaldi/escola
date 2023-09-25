@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import com.example.escola.service.PessoaService;
+
 
 
 @Controller
@@ -30,6 +32,7 @@ public class AlunoController {
 
     private final AlunoService alunoService;
     private final DisciplinaService disciplinaService;
+    private final PessoaService pessoaService;
 
 
     private TurmaService turmaService;
@@ -44,10 +47,11 @@ public class AlunoController {
 
 
     @Autowired
-    public AlunoController(AlunoService alunoService, TurmaService turmaService, DisciplinaService disciplinaService) {
+    public AlunoController(AlunoService alunoService, TurmaService turmaService, DisciplinaService disciplinaService, PessoaService pessoaService) {
         this.alunoService = alunoService;
         this.turmaService = turmaService;
         this.disciplinaService=disciplinaService;
+        this.pessoaService = pessoaService;
 
     }
 
@@ -124,7 +128,7 @@ public class AlunoController {
             aluno.setTurma(null); // Defina a turma como nula se não houver turma selecionada
         }
 
-        if (alunoService.nifExists(aluno.getNif())) {
+        if (alunoService.nifExists(aluno.getNif()) || pessoaService.nifExistsInAnyPerson(aluno.getNif())) {
             alunoResult.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
@@ -168,12 +172,12 @@ public class AlunoController {
             return "pages/aluno/edit";
         }
 
-        if (alunoService.nifExistsExceptCurrent(id, aluno.getNif())) {
+        if (alunoService.nifExists(aluno.getNif()) || pessoaService.nifExistsInAnyPerson(aluno.getNif())) {
             result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
             model.addAttribute("turmas", turmaService.getAllTurma());
             model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-            return "pages/aluno/new";
+            return "pages/aluno/edit";
         }
 
         Aluno updatedAluno = alunoService.updateAluno(id,aluno);

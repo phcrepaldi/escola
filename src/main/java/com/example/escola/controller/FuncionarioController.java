@@ -7,6 +7,7 @@ import com.example.escola.service.FuncaoService;
 import com.example.escola.service.FuncionarioService;
 import com.example.escola.enums.Genero;
 import com.example.escola.service.FuncionarioService;
+import com.example.escola.service.PessoaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import com.example.escola.repository.FuncionarioRepository;
 import com.example.escola.repository.FuncaoRepository;
+import com.example.escola.service.PessoaService;
+
 
 
 @Controller
@@ -30,6 +33,8 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     private FuncaoService funcaoService;
+    private final PessoaService pessoaService;
+
 
 
     @Autowired
@@ -40,9 +45,10 @@ public class FuncionarioController {
 
 
     @Autowired
-    public FuncionarioController(FuncionarioService funcionarioService,  FuncaoService funcaoService) {
+    public FuncionarioController(FuncionarioService funcionarioService,  FuncaoService funcaoService, PessoaService pessoaService) {
         this.funcionarioService = funcionarioService;
         this.funcaoService = funcaoService;
+        this.pessoaService = pessoaService;
     }
 
     @GetMapping("/funcionario/list")
@@ -107,7 +113,7 @@ public class FuncionarioController {
             }
         }
 
-        if (funcionarioService.nifExists(funcionario.getNif())) {
+        if (funcionarioService.nifExists(funcionario.getNif()) || pessoaService.nifExistsInAnyPerson(funcionario.getNif())) {
             funcionarioResult.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
             return "pages/funcionario/new";
@@ -147,10 +153,10 @@ public class FuncionarioController {
             return "pages/funcionario/edit";
         }
 
-        if (funcionarioService.nifExistsExceptCurrent(id, funcionario.getNif())) {
+        if (funcionarioService.nifExists(funcionario.getNif()) || pessoaService.nifExistsInAnyPerson(funcionario.getNif())) {
             result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
             model.addAttribute("generos", Genero.values());
-            return "pages/funcionario/new";
+            return "pages/funcionario/edit";
         }
 
         Funcionario updatedFuncionario = funcionarioService.updateFuncionario(id,funcionario);
