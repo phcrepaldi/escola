@@ -124,11 +124,17 @@ public class ProfessorController {
             return "pages/professores/edit";
         }
 
-        if (pessoaService.nifExistsInAnyPerson(professor.getNif())) {
-            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
-            model.addAttribute("generos", Genero.values());
-            model.addAttribute("allDisciplinas", disciplinaService.getAllDisciplinas());
-            return "pages/professores/edit";
+        Optional<Professor> existingProfessor = professorService.getProfessorById(id);
+        if (!existingProfessor.isPresent()) {
+            return "redirect:/professor/list";
+        }
+
+        if (!professor.getNif().equals(existingProfessor.get().getNif())) {
+            if (professorService.nifExists(professor.getNif()) || pessoaService.nifExistsInAnyPerson(professor.getNif())) {
+                result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+                model.addAttribute("generos", Genero.values());
+                return "pages/professor/edit";
+            }
         }
 
 

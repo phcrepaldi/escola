@@ -172,12 +172,17 @@ public class AlunoController {
             return "pages/aluno/edit";
         }
 
-        if (alunoService.nifExists(aluno.getNif()) || pessoaService.nifExistsInAnyPerson(aluno.getNif())) {
-            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
-            model.addAttribute("generos", Genero.values());
-            model.addAttribute("turmas", turmaService.getAllTurma());
-            model.addAttribute("disciplinas", disciplinaService.getAllDisciplinas());
-            return "pages/aluno/edit";
+        Optional<Aluno> existingAluno = alunoService.getAlunoById(id);
+        if (!existingAluno.isPresent()) {
+            return "redirect:/aluno/list";
+        }
+
+        if (!aluno.getNif().equals(existingAluno.get().getNif())) {
+            if (alunoService.nifExists(aluno.getNif()) || pessoaService.nifExistsInAnyPerson(aluno.getNif())) {
+                result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+                model.addAttribute("generos", Genero.values());
+                return "pages/aluno/edit";
+            }
         }
 
         Aluno updatedAluno = alunoService.updateAluno(id,aluno);

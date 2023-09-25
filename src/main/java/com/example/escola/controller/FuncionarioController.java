@@ -153,10 +153,17 @@ public class FuncionarioController {
             return "pages/funcionario/edit";
         }
 
-        if (funcionarioService.nifExists(funcionario.getNif()) || pessoaService.nifExistsInAnyPerson(funcionario.getNif())) {
-            result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
-            model.addAttribute("generos", Genero.values());
-            return "pages/funcionario/edit";
+        Optional<Funcionario> existingFuncionario = funcionarioService.getFuncionarioById(id);
+        if (!existingFuncionario.isPresent()) {
+            return "redirect:/funcionario/list";
+        }
+
+        if (!funcionario.getNif().equals(existingFuncionario.get().getNif())) {
+            if (funcionarioService.nifExists(funcionario.getNif()) || pessoaService.nifExistsInAnyPerson(funcionario.getNif())) {
+                result.rejectValue("nif", "nif.duplicate", "NIF já existe no banco de dados.");
+                model.addAttribute("generos", Genero.values());
+                return "pages/funcionario/edit";
+            }
         }
 
         Funcionario updatedFuncionario = funcionarioService.updateFuncionario(id,funcionario);
